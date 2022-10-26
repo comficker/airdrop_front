@@ -1,0 +1,20 @@
+[
+  {
+    "name": "submit",
+    "path": "/submit",
+    "component": "/Users/hoanganhlam/WebstormProjects/comingairdrop/pages/submit.vue",
+    "chunkName": "pages/submit"
+  },
+  {
+    "name": "event-page",
+    "path": "/event/:page?",
+    "component": "/Users/hoanganhlam/WebstormProjects/comingairdrop/pages/event/_page.vue",
+    "chunkName": "pages/event/_page"
+  },
+  {
+    "name": "page",
+    "path": "/:page?",
+    "component": "/Users/hoanganhlam/WebstormProjects/comingairdrop/pages/_page.vue",
+    "chunkName": "pages/_page"
+  }
+]
