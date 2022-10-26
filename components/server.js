@@ -91,16 +91,16 @@ Vue.mixin({
       const arr2 = arr[1].split(":")
       return `${arr[0]} ${arr2[0]}:${arr2[1]}`
     },
-    eventTimeStr(now, dateStart, dateEnd) {
-      const start = new Date(dateStart)
-      const end = new Date(dateEnd)
+    eventTimeStr(now, instance) {
+      const start = new Date(instance.date_start)
+      const end = new Date(instance.date_end)
       if (now.getTime() < start.getTime()) {
         // UPCOMING
-        return `Start in ${this.timeSince(dateStart)}`
+        return `Start in ${this.timeSince(instance.date_start)}`
       } else {
         if (now.getTime() < end.getTime()) {
           // ONGOING
-          return `End in ${this.timeSince(dateEnd)}`
+          return `End in ${this.timeSince(instance.date_end)}`
         } else {
           // PASSED
           return 'Ended'

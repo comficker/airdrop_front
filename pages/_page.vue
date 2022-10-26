@@ -18,7 +18,16 @@
         <event-card
           v-for="item in r1.results" :key="item.id"
           :value="item"
+          show-title
         />
+      </div>
+      <div v-if="this.r1.results.length" class="flex items-center justify-center gap-3">
+        <nuxt-link v-if="paginator.previous" :to="paginator.previous" class="cursor-pointer rounded-full">
+          <icon class="lg" name="chevron-left" />
+        </nuxt-link>
+        <nuxt-link v-if="paginator.next" :to="paginator.next" class="cursor-pointer rounded-full">
+          <icon class="lg" name="chevron-right" />
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -26,6 +35,7 @@
 
 <script>
 import EventCard from "../components/EventCard";
+
 export default {
   name: 'IndexPage',
   components: {EventCard},
@@ -33,11 +43,38 @@ export default {
     return {
       r1: {
         results: [],
-        count: 0
+        count: 0,
+        num_pages: 0
       },
       r2: {
         results: [],
-        count: 0
+        count: 0,
+        num_pages: 0
+      }
+    }
+  },
+  computed: {
+    page() {
+      return Number.parseInt(this.$route.query.page || "1")
+    },
+    paginator() {
+      const query = this.$route.query || {}
+      let next, previous
+      if (this.page < this.r1.num_pages) {
+        next = new URLSearchParams({
+          ...query,
+          page: this.page + 1
+        }).toString()
+      }
+      if (this.page > 1) {
+        previous = new URLSearchParams({
+          ...query,
+          page: this.page - 1
+        }).toString()
+      }
+      return {
+        next: next ? `/?${next}` : undefined,
+        previous: previous ? `/?${previous}` : undefined,
       }
     }
   },
@@ -46,14 +83,14 @@ export default {
     const r = await Promise.all([
       this.$axios.$get(endpoint, {
         params: {
-          page_size: 12,
-          ordering: '-last_check'
+          ordering: 'relevance,time_diff',
+          page: this.page,
+          project: this.$route.query.project
         }
       }),
       this.$axios.$get(endpoint, {
         params: {
-          page_size: 2,
-          ordering: '-today_report'
+          page_size: 2
         }
       })
     ])

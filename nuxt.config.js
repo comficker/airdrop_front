@@ -29,6 +29,11 @@ export default {
     ]
   },
 
+  publicRuntimeConfig: {
+    SITE_URI: process.env.SITE_URI,
+    API_URI: process.env.API_URI
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@/assets/main.css'
@@ -63,11 +68,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: process.env.API_DOMAIN
-  },
-
-  publicRuntimeConfig: {
-    API_DOMAIN: process.env.API_DOMAIN
+    baseURL: process.env.API_URI
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

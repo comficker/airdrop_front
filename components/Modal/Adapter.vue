@@ -6,16 +6,14 @@
         <div>
           <div class="close" @click="closeModal">
             <icon name="close" class="medium"></icon>
-            <span>close</span>
+            <span class="sm">close</span>
           </div>
         </div>
         <div class="p-4 flex-1 relative">
           <div class="absolute top-0 left-0 right-0 bottom-0 overflow-auto">
-            <div class="bg-white p-4">
+            <div class="bg-white text-black p-4">
               <modal-validate v-if="modal.type === 'validate'" :instance="modal.data"/>
-              <div v-else-if="modal.type === 'auth'" class="py-8">
-                <img class="w-1/4 cursor-pointer mx-auto" src="/metamask.svg" alt="" @click="$web3.connect()">
-              </div>
+              <modal-login v-else-if="modal.type === 'auth'"/>
             </div>
           </div>
         </div>
@@ -26,10 +24,11 @@
 
 <script>
 import ModalValidate from "./ModalValidate";
+import ModalLogin from "@/components/Modal/ModalLogin";
 
 export default {
   name: "Adapter",
-  components: {ModalValidate},
+  components: {ModalLogin, ModalValidate},
   computed: {
     modal() {
       return this.$store.state.config.modal

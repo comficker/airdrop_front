@@ -5,17 +5,17 @@
       <div class="p-1 cursor-pointer">
         <icon name="follow"></icon>
       </div>
-      <div class="p-1 cursor-pointer">
+      <a v-if="value.url" :href="value.url" target="_blank" rel="nofollow" class="p-1 cursor-pointer">
         <icon name="join"></icon>
-      </div>
+      </a>
     </div>
     <div class="flex-1">
       <div class="flex gap-3 text-xs">
         <div class="">{{ dateFormat(value.date_start) }} UTC</div>
-        <div class="text-red-500">{{ eventTimeStr(now, value.date_start, value.date_end) }}</div>
+        <div v-if="showTitle" class="text-red-500">{{ eventTimeStr(now, value) }}</div>
       </div>
-      <div class="flex justify-between">
-        <div class="text-xs font-semibold">
+      <div class="flex gap-4">
+        <div class="text-xs flex-1 font-semibold">
           <div class="font-bold text-base leading-4 my-1">
             <nuxt-link :to="`/event/${value.id_string}`">{{ value.title }}</nuxt-link>
           </div>
@@ -33,6 +33,9 @@
             <span class="text-gray-400">tasks</span>
           </div>
         </div>
+        <div v-if="value.project && value.project.media" class="w-10">
+          <img :src="`${$config.API_URI}${value.project.media.sizes['thumb_128']}`" :alt="value.project.name">
+        </div>
       </div>
     </div>
   </div>
@@ -42,7 +45,11 @@
 export default {
   name: "EventCard",
   props: {
-    value: {}
+    value: {},
+    showTitle: {
+      default: false,
+      type: Boolean
+    }
   },
   data() {
     return {

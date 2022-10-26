@@ -70,7 +70,7 @@ export default {
   },
   data() {
     return {
-      dark: true
+      dark: this.$ck.get("darkmode")
     }
   },
   methods: {
@@ -84,6 +84,7 @@ export default {
   },
   watch: {
     dark() {
+      this.$ck.set("darkmode", this.dark)
       this.switch()
     }
   },

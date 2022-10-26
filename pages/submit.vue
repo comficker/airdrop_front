@@ -98,7 +98,7 @@
       </div>
       <div class="flex justify-end gap-4">
         <div
-          class="flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-stone-900"
+          class="flex gap-1 p-1.5 px-3 cursor-pointer items-center"
           @click="submit(true)"
         >
           <span>Draft</span>
@@ -129,10 +129,8 @@ export default {
         project: null,
         name: null,
         prizes: [],
-
         date_start: null,
         date_end: null,
-
         url: null,
         title: null,
         desc: null,
@@ -141,6 +139,13 @@ export default {
         tasks: [],
         properties: [],
       }
+    }
+  },
+  computed: {
+    fakeTitle() {
+      const {project, name, prizes} = this.form
+      const p = prizes.filter(x => Boolean(x.token)).map(x => `${x.value} ${x.token.symbol}`).join(",")
+      return `${project ? project.name : '_'} ${name ? name : '_'} ${p}`
     }
   },
   methods: {
@@ -177,6 +182,13 @@ export default {
       }).then(res => {
         this.$router.push(`/event/${res.id_string}`)
       })
+    }
+  },
+  watch: {
+    fakeTitle(b, a) {
+      if (a === this.form.title || !this.form.title) {
+        this.form.title = b
+      }
     }
   }
 }

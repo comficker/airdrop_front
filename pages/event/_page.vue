@@ -3,7 +3,7 @@
     <div class="max-w-2xl mx-auto space-y-2">
       <div v-if="instance" class="flex gap-3 text-xs">
         <div class="">{{ dateFormat(instance.date_start) }} UTC</div>
-        <div class="text-gray-500">{{ eventTimeStr(now, instance.date_start, instance.date_end) }}</div>
+        <div class="text-gray-500">{{ eventTimeStr(now, instance) }}</div>
       </div>
       <h1
         class="text-5xl text-green-900 font-extrabold dark:text-green-300"
@@ -212,10 +212,10 @@ export default {
     },
     social() {
       return {
-        title: this.meta.title,
+        title: this.meta.title + ' ' + (this.instance ? this.eventTimeStr(this.now, this.instance) : ''),
         desc: this.meta.desc,
         quote: this.instance?.desc,
-        url: `https://issomethingdown.com/${this.instance?.id_string}`,
+        url: process.client ? window.location.href : '',
         tags: `${this.instance?.name},Outage`
       }
     }

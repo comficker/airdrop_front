@@ -3,18 +3,21 @@
     "name": "submit",
     "path": "/submit",
     "component": "/Users/hoanganhlam/WebstormProjects/comingairdrop/pages/submit.vue",
-    "chunkName": "pages/submit"
+    "chunkName": "pages/submit",
+    "_name": "_470aa573"
   },
   {
     "name": "event-page",
     "path": "/event/:page?",
     "component": "/Users/hoanganhlam/WebstormProjects/comingairdrop/pages/event/_page.vue",
-    "chunkName": "pages/event/_page"
+    "chunkName": "pages/event/_page",
+    "_name": "_1517e8ee"
   },
   {
     "name": "page",
     "path": "/:page?",
     "component": "/Users/hoanganhlam/WebstormProjects/comingairdrop/pages/_page.vue",
-    "chunkName": "pages/_page"
+    "chunkName": "pages/_page",
+    "_name": "_dd26f83a"
   }
 ]

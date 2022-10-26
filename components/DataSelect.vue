@@ -89,6 +89,9 @@ export default {
         }
         this.temp = cloneDeep(term);
       }
+    },
+    search() {
+      this.fetch()
     }
   },
   methods: {
