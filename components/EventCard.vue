@@ -1,6 +1,6 @@
 <template>
   <div
-    class="border dark:border-stone-900 dark:md:border-transparent md:border-transparent hover:border-gray-200 dark:hover:border-stone-900 duration-200 p-3 group flex gap-3">
+    class="border dark:border-stone-800 dark:md:border-transparent md:border-transparent hover:border-gray-200 dark:hover:border-stone-800 duration-200 p-3 group flex gap-3">
     <div class="flex flex-col text-xs">
       <div class="p-1 cursor-pointer">
         <icon name="follow"></icon>

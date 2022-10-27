@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto py-8 space-y-4">
-    <div class="grid grid-cols-2 gap-4 md:-mx-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:-mx-6">
       <event-card v-for="item in r2.results" :key="item.id_string" :value="item"/>
     </div>
     <div class="space-y-3">

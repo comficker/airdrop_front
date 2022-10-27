@@ -56,7 +56,8 @@
           @click="action('join', instance)"
           content="Coming soon" v-tippy='{ arrow: true }'
         >
-          <span>I'm done</span>
+          <icon name="check"></icon>
+          <span class="hidden md:block">done</span>
           <icon name="drag"></icon>
           <span>0</span>
         </div>
@@ -66,7 +67,7 @@
           content="Coming soon" v-tippy='{ arrow: true }'
         >
           <icon name="follow"></icon>
-          <span>follow</span>
+          <span class="hidden md:block">follow</span>
           <icon name="drag"></icon>
           <span>0</span>
         </div>

@@ -11,13 +11,13 @@
       </div>
       <adapter/>
       <div
-        class="fixed bottom-0 right-0 left-0 bg-white border-t divide-x text-xs text-gray-500 flex dark:bg-black dark:border-stone-900 dark:divide-stone-900">
-        <div class="p-3 py-1">Copyright © 2021 ongoingairdrop.com.</div>
+        class="fixed bottom-0 right-0 left-0 bg-white border-t divide-x text-xs text-gray-500 flex items-center dark:bg-black dark:border-stone-900 dark:divide-stone-900">
+        <div class="p-3 py-1">Copyright © 2022 ongoingairdrop.com</div>
         <div class="p-3 py-1 flex space-x-3 fill-gray-500">
           <icon name="twitter"/>
           <icon name="discord" vb="128"/>
         </div>
-        <div class="flex-1 flex justify-end fill-gray-500">
+        <div class="flex-1 flex justify-end fill-gray-500 items-center">
           <div
             class="p-3 py-1 cursor-pointer"
             :class="{'fill-green-500': dark}"
