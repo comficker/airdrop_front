@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class="space-y-4 pt-4">
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div class="space-y-1">
               <div class="text-xs uppercase text-gray-500">Start date</div>
               <datetime-picker v-model="form.date_start"/>
