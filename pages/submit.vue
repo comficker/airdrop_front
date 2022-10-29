@@ -11,7 +11,7 @@
           want the world to know about it? You're in the right place. So relax and follow the steps.
         </p>
       </div>
-      <div class="border space-y-4 p-4 divide-y divide-dashed dark:divide-stone-900 dark:border-stone-900">
+      <div class="border space-y-4 p-4 divide-y divide-dashed dark:divide-stone-900 dark:border-stone-800">
         <div class="space-y-3">
           <div class="font-bold flex space-x-2 items-center">
             <icon name="note"></icon>

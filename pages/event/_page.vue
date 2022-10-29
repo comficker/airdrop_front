@@ -1,12 +1,12 @@
 <template>
-  <div class="space-y-6 py-4 md:py-8">
+  <div class="space-y-4 py-4 md:py-8">
     <div class="max-w-2xl mx-auto space-y-2">
       <div v-if="instance" class="flex gap-3 text-xs">
         <div class="">{{ dateFormat(instance.date_start) }} UTC</div>
         <div class="text-gray-500">{{ eventTimeStr(now, instance) }}</div>
       </div>
       <h1
-        class="text-5xl text-green-900 font-extrabold dark:text-green-300"
+        class="text-4xl text-green-900 font-extrabold dark:text-green-300"
         :class="{'h-10 w-32 bg-gray-200 dark:bg-stone-900 animate-pulse mb-2': !instance}"
         :style="!instance ? {width: `45%`} : undefined"
       >
@@ -19,116 +19,128 @@
         <template v-if="instance">{{ instance.desc }}</template>
       </p>
     </div>
-    <div class="max-w-2xl mx-auto space-y-4 divide-y divide-dashed dark:divide-stone-900">
-      <div v-if="instance" class="space-y-2">
-        <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">
-          <icon name="prize"></icon>
-          <span>Reward</span>
-        </h2>
-        <template v-for="item in instance.prizes">
-          <div class="flex gap-1 text-3xl">
-            <span class="text-red-500">{{ item.value.toLocaleString() }}</span>
-            <span class="text-gray-400">{{ item.token.symbol }}</span>
+    <div class="max-w-2xl mx-auto">
+      <div class="md:flex gap-4 md:divide-x dark:divide-stone-800 divide-dashed">
+        <div class="flex-1 mb-4 space-y-4 divide-y dark:divide-stone-800 divide-dashed">
+          <div v-if="instance" class="space-y-2">
+            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">
+              <icon name="prize"></icon>
+              <span>Reward</span>
+            </h2>
+            <template v-for="item in instance.prizes">
+              <div class="flex gap-1 text-3xl">
+                <span class="text-red-500">{{ item.value.toLocaleString() }}</span>
+                <span class="text-gray-400">{{ item.token.symbol }}</span>
+              </div>
+              <p class="text-xs text-gray-500">{{ item.note }}</p>
+            </template>
           </div>
-          <p class="text-xs text-gray-500">{{ item.note }}</p>
-        </template>
-      </div>
-      <div v-if="instance" class="pt-4 space-y-2">
-        <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">
-          <icon name="tasks"></icon>
-          <span>Tasks</span>
-        </h2>
-        <div v-for="(item, i) in instance.tasks" :key="i" class="flex gap-2 items-center">
-          <icon name="check"></icon>
-          <div>{{ item }}</div>
-        </div>
-      </div>
-      <div class="pt-4 flex gap-4">
-        <a
-          v-if="instance" :href="instance.url" target="_blank" rel="nofollow"
-          class="flex gap-1 p-1.5 px-3 cursor-pointer items-center bg-green-600 text-white dark:fill-white"
-        >
-          <icon name="join"></icon>
-          <span>Join</span>
-        </a>
-        <div
-          class="flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-gray-500"
-          @click="action('join', instance)"
-          content="Coming soon" v-tippy='{ arrow: true }'
-        >
-          <icon name="check"></icon>
-          <span class="hidden md:block">done</span>
-          <icon name="drag"></icon>
-          <span>0</span>
-        </div>
-        <div
-          class="flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-gray-500"
-          @click="action('follow', instance)"
-          content="Coming soon" v-tippy='{ arrow: true }'
-        >
-          <icon name="follow"></icon>
-          <span class="hidden md:block">follow</span>
-          <icon name="drag"></icon>
-          <span>0</span>
-        </div>
-      </div>
-      <div class="pt-4 grid md:grid-cols-2 gap-4 text-center font-bold">
-        <div class="">
-          <ShareNetwork
-            class="block cursor-pointer w-full p-2 bg-blue-500 rounded text-white"
-            network="facebook"
-            :url="social.url"
-            :title="social.title"
-            :description="social.desc"
-            :quote="social.quote"
-            :hashtags="social.tags"
-          >
-            Share on facebook
-          </ShareNetwork>
-        </div>
-        <div class="">
-          <ShareNetwork
-            class="block cursor-pointer w-full p-2 bg-blue-400 rounded text-white"
-            network="twitter"
-            :url="social.url"
-            :title="social.title"
-            :description="social.desc"
-            :quote="social.quote"
-            :hashtags="social.tags"
-          >
-            Share on twitter
-          </ShareNetwork>
-        </div>
-      </div>
-      <div class="pt-4 space-y-2">
-        <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">
-          <icon name="drag"/>
-          <span>Check also</span>
-        </h2>
-        <div class="flex gap-1.5 flex-col text-green-700">
-          <nuxt-link
-            v-for="(item, i) in res.results"
-            :key="i"
-            class="flex items-center py-1 space-x-1"
-            :to="`/event/${item?.id_string}`"
-          >
-            <div
-              class="w-3 h-3"
-              :class="{'bg-gray-200 dark:bg-stone-900 animate-pulse': !item}"
+          <div class="pt-4">
+            <a
+              v-if="instance" :href="instance.url" target="_blank" rel="nofollow"
+              class="flex gap-1 rounded justify-center p-2 px-3 cursor-pointer items-center bg-green-600 text-white dark:fill-white fill-white w-full"
             >
-              <img
-                v-if="item"
-                :src="item.external_ico"
-                alt=""
+              <icon name="join"></icon>
+              <span>Join</span>
+            </a>
+          </div>
+          <div class="pt-4 grid grid-cols-2 gap-4">
+            <div
+              class="rounded flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-gray-500"
+              @click="action('join', instance)"
+              content="Coming soon" v-tippy='{ arrow: true }'
+            >
+              <icon name="check"/>
+              <icon name="drag"/>
+              <span>0</span>
+              <span class="hidden md:block">did</span>
+            </div>
+            <div
+              class="rounded flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-gray-500"
+              @click="action('follow', instance)"
+              content="Coming soon" v-tippy='{ arrow: true }'
+            >
+              <icon name="follow"></icon>
+              <icon name="drag"></icon>
+              <span>0</span>
+              <span class="hidden md:block">followed</span>
+            </div>
+          </div>
+          <div class="pt-4 space-y-2" v-if="instance">
+            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">
+              <icon name="tasks"></icon>
+              <span>Tasks</span>
+            </h2>
+            <div v-for="(item, i) in instance.tasks" :key="i" class="flex gap-2 items-start">
+              <icon name="plus"></icon>
+              <div>{{ item }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="md:pl-4 md:w-2/5 space-y-4 divide-y divide-dashed dark:divide-stone-800">
+          <div class="space-y-3">
+            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">
+              <icon name="business"/>
+              <span>Organizer</span>
+            </h2>
+            <div v-if="instance && instance.project" class="flex gap-3 items-center">
+              <div class="w-10 h-10">
+                <img
+                  v-if="instance.project.media"
+                  :src="`${$config.API_URI}${instance.project.media.sizes['thumb_128']}`"
+                  :alt="instance.project.name"
+                  class="rounded"
+                >
+              </div>
+              <div>{{instance.project.name}}</div>
+            </div>
+          </div>
+          <div class="pt-4 space-y-3">
+            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">
+              <icon name="timeline"/>
+              <span>Timeline</span>
+            </h2>
+            <div>
+              <div class="text-xs text-gray-500">Start date</div>
+              <div>
+                <template v-if="instance">{{ dateFormat(instance.date_start) }} UTC</template>
+              </div>
+            </div>
+            <div>
+              <div class="text-xs text-gray-500">End date</div>
+              <div>
+                <template v-if="instance">{{ dateFormat(instance.date_end) }} UTC</template>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 grid md:grid-cols-1 gap-4 text-center font-bold">
+            <div class="">
+              <ShareNetwork
+                class="block cursor-pointer w-full p-2 bg-gray-100 dark:bg-gray-800 hover:bg-blue-500 hover:dark:bg-blue-500 rounded text-black hover:text-white dark:text-white duration-300"
+                network="facebook"
+                :url="social.url"
+                :title="social.title"
+                :description="social.desc"
+                :quote="social.quote"
+                :hashtags="social.tags"
               >
+                Share on facebook
+              </ShareNetwork>
             </div>
-            <div
-              class="px-2 font-bold"
-              :class="{'h-3 w-36 bg-gray-200 dark:bg-stone-900 animate-pulse': !item}"
-            >
-              <span v-if="item">{{ item.title }}</span>
+            <div class="">
+              <ShareNetwork
+                class="block cursor-pointer w-full p-2 bg-gray-100 dark:bg-gray-800 hover:bg-blue-400 hover:dark:bg-blue-500 rounded text-black hover:text-white dark:text-white duration-300"
+                network="twitter"
+                :url="social.url"
+                :title="social.title"
+                :description="social.desc"
+                :quote="social.quote"
+                :hashtags="social.tags"
+              >
+                Share on twitter
+              </ShareNetwork>
             </div>
-          </nuxt-link>
+          </div>
         </div>
       </div>
     </div>
@@ -136,8 +148,10 @@
 </template>
 
 <script>
+import EventCard from "@/components/EventCard";
 export default {
   name: "PageIndex",
+  components: {EventCard},
   data() {
     const fr = new Date()
     const to = new Date()
@@ -169,7 +183,7 @@ export default {
       this.$axios.$get(`/project/events/`, {
         params: {
           related: this.$route.params.page,
-          page_size: 5
+          page_size: 6
         }
       })
     ])

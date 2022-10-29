@@ -1,6 +1,6 @@
 <template>
   <div :class="{dark: dark}">
-    <div class="py-8 px-4 dark:bg-black dark:text-white min-h-screen dark:fill-gray-500">
+    <div class="py-6 px-4 dark:bg-neutral-900 dark:text-white min-h-screen fill-neutral-500 dark:fill-neutral-100">
       <p-header :dark="dark"/>
       <div class="content-wrapper">
         <div class="main-wrapper">
@@ -11,7 +11,7 @@
       </div>
       <adapter/>
       <div
-        class="fixed bottom-0 right-0 left-0 bg-white border-t divide-x text-xs text-gray-500 flex items-center dark:bg-black dark:border-stone-900 dark:divide-stone-900">
+        class="fixed bottom-0 right-0 left-0 bg-white border-t divide-x text-xs text-gray-500 flex items-center dark:bg-neutral-900 dark:border-neutral-800 dark:divide-neutral-800">
         <div class="p-3 py-1">Copyright © 2022 ongoingairdrop.com</div>
         <div class="p-3 py-1 flex space-x-3 fill-gray-500">
           <icon name="twitter"/>

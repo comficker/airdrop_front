@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-2xl mx-auto py-8 space-y-4">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:-mx-6">
-      <event-card v-for="item in r2.results" :key="item.id_string" :value="item"/>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:-mx-10 lg:-mx-32">
+      <event-card v-for="item in r2.results" :key="item.id_string" :value="item" highlight/>
     </div>
     <div class="space-y-3">
       <h2 class="font-bold uppercase flex space-x-2 items-center">
@@ -14,8 +14,9 @@
         </svg>
         <span>Ongoing Airdrops</span>
       </h2>
-      <div class="grid grid-cols-1 md:gap-0 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <event-card
+          highlight
           v-for="item in r1.results" :key="item.id"
           :value="item"
           show-title
@@ -90,7 +91,7 @@ export default {
       }),
       this.$axios.$get(endpoint, {
         params: {
-          page_size: 2
+          page_size: 3
         }
       })
     ])

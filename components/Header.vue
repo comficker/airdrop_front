@@ -12,7 +12,7 @@
           class="md:relative absolute left-0 right-0 top-full pt-4 md:pt-0 z-10 md:block"
           :class="{'hidden': !showMobileMenu}"
         >
-          <div class="flex-1 flex items-center gap-3 bg-white dark:bg-black dark:border-stone-800 p-4 md:p-0 border md:border-none">
+          <div class="flex-1 flex items-center gap-3 bg-white dark:bg-neutral-900 dark:border-stone-800 p-4 md:p-0 border md:border-none">
             <div class="flex flex-col md:flex-row  gap-4 font-bold text-gray-500">
               <nuxt-link to="/" class="flex items-center gap-2">
                 <div class="w-3 h-3 flex items-center justify-center rounded-full bg-green-400">
