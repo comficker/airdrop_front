@@ -16,7 +16,7 @@
             <icon class="sm" name="prize"></icon>
             <template v-for="item in value.prizes">
               <span class="text-red-500">{{ item.value.toLocaleString() }}</span>
-              <span class="text-gray-400">{{ item.token.symbol }}</span>
+              <span class="text-gray-400">{{ symbol(item.token.symbol) }}</span>
             </template>
             <span v-if="value.prizes.length === 0">0</span>
           </div>

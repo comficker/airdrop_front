@@ -30,7 +30,7 @@
             <template v-for="item in instance.prizes">
               <div class="flex gap-1 text-3xl">
                 <span class="text-red-500">{{ item.value.toLocaleString() }}</span>
-                <span class="text-gray-400">{{ item.token.symbol }}</span>
+                <span class="text-gray-400">{{ symbol(item.token.symbol) }}</span>
               </div>
               <p class="text-xs text-gray-500">{{ item.note }}</p>
             </template>

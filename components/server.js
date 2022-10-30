@@ -112,6 +112,12 @@ Vue.mixin({
       this.$api.event[type](instance.id, {}).then(res => {
         console.log(res);
       })
+    },
+    symbol(str) {
+      if (str.length > 10) {
+        return `ADD...${str.substr(str.length - 4, str.length)}`
+      }
+      return str
     }
   }
 })
