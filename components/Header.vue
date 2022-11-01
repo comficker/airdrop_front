@@ -9,7 +9,7 @@
           <icon :name="showMobileMenu ? 'close' : 'menu'"/>
         </div>
         <div
-          class="md:relative absolute left-0 right-0 top-full pt-4 md:pt-0 z-10 md:block"
+          class="md:relative absolute left-0 right-0 top-full pt-4 md:pt-0 z-10 md:block -mx-4 md:mx-0"
           :class="{'hidden': !showMobileMenu}"
         >
           <div class="flex-1 flex items-center gap-3 bg-neutral-100 dark:bg-neutral-800 dark:border-stone-800 p-4 md:p-0 border md:border-none">

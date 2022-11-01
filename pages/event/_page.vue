@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen py-4">
+  <div class="md:h-screen py-4">
     <div class="max-w-2xl mx-auto space-y-2">
       <div v-if="instance" class="flex gap-3 text-xs">
         <div class="">{{ dateFormat(instance.date_start) }} UTC</div>
@@ -20,8 +20,8 @@
       </p>
     </div>
     <div class="max-w-2xl mx-auto">
-      <div class="md:flex gap-4 h-full">
-        <div class="flex-1 py-4 mb-4 space-y-4 divide-y dark:divide-stone-700 divide-dashed h-full">
+      <div class="md:flex gap-4 h-full md:divide-y-none divide-y dark:divide-stone-700">
+        <div class="flex-1 py-4 space-y-4 divide-y dark:divide-stone-700 divide-dashed h-full">
           <div v-if="instance" class="space-y-2">
             <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">
               <icon name="prize"></icon>

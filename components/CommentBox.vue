@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class="flow-root space-y-4">
+    <div v-if="results.length" class="flow-root space-y-4">
       <ul role="list">
         <li v-for="(item, i) in results" :key="item.id">
           <div class="relative pb-6">

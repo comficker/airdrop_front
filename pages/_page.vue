@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-2xl mx-auto space-y-4 md:space-y-0 md:flex gap-4 md:divide-x dark:divide-stone-700">
+  <div class="max-w-2xl mx-auto md:flex gap-4 divide-y md:divide-y-none md:divide-x dark:divide-stone-700">
     <div class="space-y-3 md:w-2/3 py-4">
       <div class="flex items-center justify-between">
         <h2 class="font-bold uppercase flex space-x-2 items-center">
@@ -40,25 +40,25 @@
         </nuxt-link>
       </div>
     </div>
-    <div class="py-4 flex-1 space-y-3 divide-y dark:divide-stone-700 divide-dashed md:pl-4 sticky top-0">
-      <div class="space-y-2">
+    <div class="pt-4 pb-8 flex-1 space-y-3 divide-y dark:divide-stone-700 divide-dashed md:pl-4 sticky top-0">
+      <div class="space-y-3">
         <h3 class="font-bold uppercase flex space-x-2 items-center">
           <icon name="drag"/>
           <span>Activity</span>
         </h3>
       </div>
-      <div class="pt-4 space-y-2">
+      <div class="pt-4 space-y-3">
         <h3 class="font-bold uppercase flex space-x-2 items-center">
           <icon name="drag"/>
           <span>Project</span>
         </h3>
       </div>
-      <div class="pt-4 space-y-2">
+      <div class="pt-4 space-y-3">
         <h3 class="font-bold uppercase flex space-x-2 items-center">
           <icon name="drag"/>
           <span>Hunter</span>
         </h3>
-        <div class="grid grid-cols-5 gap-1">
+        <div class="grid grid-cols-10 md:grid-cols-5 gap-1">
           <div v-for="i in 20" :key="i">
             <img
               class="rounded"
