@@ -1,6 +1,6 @@
 <template>
   <div
-    class="border dark:border-stone-800 hover:border-gray-200 dark:hover:border-stone-800 duration-200 p-3 group flex gap-3"
+    class="border rounded bg-white dark:border-stone-800 dark:bg-neutral-900/50 hover:border-gray-200 dark:hover:border-stone-800 duration-200 p-3 group flex gap-3"
     :class="{'dark:md:border-transparent md:border-transparent': !highlight}"
   >
     <div class="flex-1">
@@ -9,7 +9,7 @@
       </div>
       <div class="flex gap-4">
         <div class="text-xs flex-1 font-semibold">
-          <div class="font-bold text-base leading-4 my-1 a-line text-base">
+          <div class="font-bold text-base leading-4 my-1 a-line text-base text-green-900 dark:text-green-300">
             <nuxt-link v-if="value" :to="`/event/${value.id_string}`">{{ value.title }}</nuxt-link>
           </div>
           <div v-if="value" class="flex gap-1">
@@ -30,7 +30,7 @@
           <img v-if="value && value.project && value.project.media"  :src="`${$config.API_URI}${value.project.media.sizes['thumb_128']}`" :alt="value.project.name">
         </div>
       </div>
-      <div class="mt-2 flex text-xs text-center gap-3 items-center">
+      <div class="mt-2 flex text-xs gap-3 items-center">
         <div v-if="value" class="rounded gap-1 p-1.5 px-3 cursor-pointer border dark:border-gray-800 flex-1">
           <template>{{ eventTimeStr(now, value) }}</template>
         </div>

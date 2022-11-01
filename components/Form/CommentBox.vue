@@ -7,20 +7,53 @@
       >
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
       </svg>
-      <div class="">Community feedback</div>
+      <div class="">Community feedback on {{ instance?.name || 'Something' }}'s status</div>
     </div>
     <div class="space-y-1.5">
       <textarea
         v-model="content"
         placeholder="I had an issue!"
-        class="p-3 text-sm border rounded w-full shadow-inner dark:bg-neutral-700 dark:border-neutral-800 outline-none"
+        class="p-3 text-sm border rounded w-full shadow-inner"
       />
       <div class="md:flex justify-between font-bold">
-        <div class="flex space-x-3"></div>
+        <div class="flex space-x-3">
+          <div class="flex justify-center space-x-1 items-center text-xs">
+            <button
+              class="bg-green-500 relative outline-none inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-lg cursor-pointer transition-colors ease-in-out duration-200"
+              :class="{ 'bg-gray-300': !is_down }"
+              @click="is_down = !is_down"
+            >
+              <span
+                aria-hidden="true"
+                class="pointer-events-none inline-block h-5 w-5 rounded-md bg-white shadow transform ring-0 transition ease-in-out duration-200"
+                :class="{'translate-x-5': is_down, 'translate-x-0': !is_down}"
+              ></span>
+            </button>
+            <div class="rounded-full cursor-pointer">
+              <span>Current down</span>
+            </div>
+          </div>
+        </div>
         <div class="flex space-x-3 justify-between">
           <div class="flex justify-center space-x-1 items-center text-xs">
+            <button
+              class="bg-green-500 relative outline-none inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-lg cursor-pointer transition-colors ease-in-out duration-200"
+              :class="{ 'bg-gray-300': !hasLocate }"
+              @click="getLocate"
+            >
+              <span
+                aria-hidden="true"
+                class="pointer-events-none inline-block h-5 w-5 rounded-md bg-white shadow transform ring-0 transition ease-in-out duration-200"
+                :class="{'translate-x-5': hasLocate, 'translate-x-0': !hasLocate}"
+              ></span>
+            </button>
+            <div class="rounded-full cursor-pointer">
+              <span>Share location</span>
+            </div>
           </div>
-          <div class="cursor-pointer px-6 text-xs p-2 bg-green-500 rounded-full text-white font-bold" @click="send">Send</div>
+          <div class="cursor-pointer px-6 text-xs p-2 bg-green-500 rounded-full text-white font-bold" @click="send">Send
+            report
+          </div>
         </div>
       </div>
     </div>
@@ -64,6 +97,13 @@
           </div>
         </li>
       </ul>
+      <div class="flex justify-center">
+        <div
+          class="text-xs cursor-pointer px-4 py-1 rounded border"
+          @click="$emit('load')"
+        >Load more
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -97,15 +137,32 @@ export default {
     }
   },
   methods: {
+    showPosition(position) {
+      if (position) {
+        this.location.lat = position.coords.latitude
+        this.location.log = position.coords.longitude
+      }
+    },
+    getLocate() {
+      if (this.hasLocate) {
+        this.location = {
+          lat: 0,
+          log: 0
+        }
+      }
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.showPosition);
+      }
+    },
     send() {
-      // this.$axios.$post('/app/reports/', {
-      //   is_down: this.is_down,
-      //   content: this.content,
-      //   instance: this.instance.id,
-      //   ...this.hasLocate ? this.location : {}
-      // }).then((res) => {
-      //   this.$emit('sent', res)
-      // })
+      this.$axios.$post('/app/reports/', {
+        is_down: this.is_down,
+        content: this.content,
+        instance: this.instance.id,
+        ...this.hasLocate ? this.location : {}
+      }).then((res) => {
+        this.$emit('sent', res)
+      })
     }
   }
 }

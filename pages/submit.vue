@@ -11,7 +11,7 @@
           want the world to know about it? You're in the right place. So relax and follow the steps.
         </p>
       </div>
-      <div class="border space-y-4 p-4 divide-y divide-dashed dark:divide-stone-900 dark:border-stone-800">
+      <div class="border bg-white dark:bg-neutral-900 space-y-4 p-4 divide-y divide-dashed dark:divide-stone-700 dark:border-stone-800 rounded">
         <div class="space-y-3">
           <div class="font-bold flex space-x-2 items-center">
             <icon name="note"></icon>
@@ -45,7 +45,7 @@
               @clear="form.prizes.splice(i, 1)"
             />
             <div
-              class="flex gap-1 p-1.5 px-3 cursor-pointer items-center bg-green-600 text-white"
+              class="flex gap-1 p-1.5 px-3 cursor-pointer items-center"
               @click="addPrize"
             >
               <icon name="plus" class="fill-white"/>
@@ -73,7 +73,7 @@
           <div class="flex border p-1 dark:border-0 dark:bg-stone-800">
             <input v-model="newTask" class="bg-transparent outline-none p-2 py-1.5 flex-1" type="text"
                    placeholder="todo">
-            <div class="flex gap-1 p-1 px-3 cursor-pointer items-center bg-green-600 text-white" @click="addTask">
+            <div class="flex gap-1 p-1 px-3 cursor-pointer items-center" @click="addTask">
               <icon name="plus" class="fill-white sm"/>
               <span>Add task</span>
             </div>

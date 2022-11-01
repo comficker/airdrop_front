@@ -5,7 +5,7 @@
       <div class="body">
         <div>
           <div class="close" @click="closeModal">
-            <icon name="close" class="medium"></icon>
+            <icon name="close" class="sm dark:fill-gray-900"/>
             <span class="sm">close</span>
           </div>
         </div>

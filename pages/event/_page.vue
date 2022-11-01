@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-4 py-4 md:py-8">
+  <div class="h-screen py-4">
     <div class="max-w-2xl mx-auto space-y-2">
       <div v-if="instance" class="flex gap-3 text-xs">
         <div class="">{{ dateFormat(instance.date_start) }} UTC</div>
@@ -20,8 +20,8 @@
       </p>
     </div>
     <div class="max-w-2xl mx-auto">
-      <div class="md:flex gap-4 md:divide-x dark:divide-stone-800 divide-dashed">
-        <div class="flex-1 mb-4 space-y-4 divide-y dark:divide-stone-800 divide-dashed">
+      <div class="md:flex gap-4 h-full">
+        <div class="flex-1 py-4 mb-4 space-y-4 divide-y dark:divide-stone-700 divide-dashed h-full">
           <div v-if="instance" class="space-y-2">
             <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">
               <icon name="prize"></icon>
@@ -76,8 +76,9 @@
               <div>{{ item }}</div>
             </div>
           </div>
+          <comment-box class="pt-4"/>
         </div>
-        <div class="md:pl-4 md:w-2/5 space-y-4 divide-y divide-dashed dark:divide-stone-800">
+        <div class="md:pl-4 py-4 md:w-2/5 space-y-4 divide-y divide-dashed dark:divide-stone-800">
           <div class="space-y-3">
             <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">
               <icon name="business"/>
@@ -116,7 +117,7 @@
           <div class="pt-4 grid md:grid-cols-1 gap-4 text-center font-bold">
             <div class="">
               <ShareNetwork
-                class="block cursor-pointer w-full p-2 bg-gray-100 dark:bg-gray-800 hover:bg-blue-500 hover:dark:bg-blue-500 rounded text-black hover:text-white dark:text-white duration-300"
+                class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-500 hover:dark:bg-blue-500 rounded text-black hover:text-white dark:text-white duration-300"
                 network="facebook"
                 :url="social.url"
                 :title="social.title"
@@ -129,7 +130,7 @@
             </div>
             <div class="">
               <ShareNetwork
-                class="block cursor-pointer w-full p-2 bg-gray-100 dark:bg-gray-800 hover:bg-blue-400 hover:dark:bg-blue-500 rounded text-black hover:text-white dark:text-white duration-300"
+                class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-400 hover:dark:bg-blue-500 rounded text-black hover:text-white dark:text-white duration-300"
                 network="twitter"
                 :url="social.url"
                 :title="social.title"
