@@ -48,7 +48,7 @@
               class="flex gap-1 p-1.5 px-3 cursor-pointer items-center"
               @click="addPrize"
             >
-              <icon name="plus" class="fill-white"/>
+              <icon name="plus"/>
               <span>Add prize</span>
             </div>
           </div>
@@ -74,7 +74,7 @@
             <input v-model="newTask" class="bg-transparent outline-none p-2 py-1.5 flex-1" type="text"
                    placeholder="todo">
             <div class="flex gap-1 p-1 px-3 cursor-pointer items-center" @click="addTask">
-              <icon name="plus" class="fill-white sm"/>
+              <icon name="plus" class="sm"/>
               <span>Add task</span>
             </div>
           </div>
