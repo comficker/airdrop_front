@@ -107,10 +107,9 @@ Vue.mixin({
         }
       }
     },
-    action(type, instance) {
-      console.log(this.$api.event[type]);
+    action(type, instance, callback) {
       this.$api.event[type](instance.id, {}).then(res => {
-        console.log(res);
+        callback(type, res)
       })
     },
     symbol(str) {

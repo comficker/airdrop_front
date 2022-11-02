@@ -7,18 +7,24 @@ export default async function (context, inject) {
     await setUser(null);
   };
   const login = async (credential) => {
-    let res = await context.$axios.$post('/auth/rest-auth/login/', credential).catch(e => {
-      console.log(e);
+    let res = await context.$axios.$post('/auth/token', credential).catch(e => {
+      return null
     });
     if (res) {
-      await setToken(res['token']);
-      let user = await getUser();
-      await setUser(user);
+      await setToken(res['access']);
+      await setUser(await getUser());
     }
+    return res
+  };
+  const register = async (credential) => {
+    return await context.$axios.$post('/auth/user', credential).catch(e => {
+      console.log(e);
+      return null
+    });
   };
   const getUser = async () => {
     try {
-      return await context.$axios.$get('/auth/users/me/');
+      return await context.$axios.$get('/auth/user');
     } catch (e) {
       if (e.response && e.response.status === 401) {
         await logout();
@@ -38,7 +44,7 @@ export default async function (context, inject) {
   };
   const setToken = async (token) => {
     if (token) {
-      context.$axios.setHeader('Authorization', 'JWT ' + token);
+      context.$axios.setHeader('Authorization', 'Bearer ' + token);
       context.store.$ck.set('auth.token', token, {
         maxAge: 60 * 60 * 24 * 7,
         path: '/'
@@ -59,11 +65,10 @@ export default async function (context, inject) {
     }
   };
 
-  if (process['server']) {
-    await init();
-  }
+  await init();
 
   $auth.login = login;
+  $auth.register = register;
   $auth.logout = logout;
   context.$auth = $auth;
   inject('auth', $auth);

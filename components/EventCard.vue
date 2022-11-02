@@ -27,7 +27,11 @@
           </div>
         </div>
         <div class="w-10">
-          <img v-if="value && value.project && value.project.media"  :src="`${$config.API_URI}${value.project.media.sizes['thumb_128']}`" :alt="value.project.name">
+          <img
+            v-if="value && value.project && value.project.media"
+            :src="`${$config.API_URI}${value.project.media.sizes['thumb_128']}`"
+            :alt="value.project.name"
+          >
         </div>
       </div>
       <div class="mt-2 flex text-xs gap-3 items-center">
@@ -35,7 +39,9 @@
           <template>{{ eventTimeStr(now, value) }}</template>
         </div>
         <div class="p-1 cursor-pointer">
-          <icon name="follow"></icon>
+          <icon
+            name="follow" :class="{'fill-green-500': is_following}"
+            @click="action('follow', value, handleAction)"/>
         </div>
       </div>
     </div>
@@ -58,13 +64,24 @@ export default {
   },
   data() {
     return {
-      now: new Date()
+      now: new Date(),
+      is_following: this.value?.is_following || false
+    }
+  },
+  watch: {
+    value() {
+      this.is_following = this.value?.is_following || false
     }
   },
   mounted() {
     setInterval(() => {
       this.now = new Date()
     }, 1000)
+  },
+  methods: {
+    handleAction(tp, res) {
+      this.is_following = !this.is_following
+    }
   }
 }
 </script>

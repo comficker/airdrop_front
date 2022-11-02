@@ -131,13 +131,17 @@ export default {
     "$route"() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       this.$fetch()
+    },
+    "$store.state.auth.user"() {
+      this.$fetch()
     }
   },
   async fetch() {
     const r = await Promise.all([
       this.$axios.$get('/project/events/', {
         params: {
-          ordering: 'relevance,time_diff',
+          ordering: 'time_diff',
+          page_name: this.$route.params.page || 'ongoing',
           page: this.page,
           project: this.$route.query.project
         }

@@ -47,22 +47,20 @@
           <div class="pt-4 grid grid-cols-2 gap-4">
             <div
               class="rounded flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-gray-500"
-              @click="action('join', instance)"
-              content="Coming soon" v-tippy='{ arrow: true }'
+              @click="action('join', instance, handleAction)"
             >
-              <icon name="check"/>
+              <icon name="check" :class="{'fill-green-500': instance?.is_joined}"/>
               <icon name="drag"/>
-              <span>0</span>
-              <span class="hidden md:block">did</span>
+              <span>{{instance?.meta?.total_joined || 0}}</span>
+              <span class="hidden md:block">joined</span>
             </div>
             <div
               class="rounded flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-gray-500"
-              @click="action('follow', instance)"
-              content="Coming soon" v-tippy='{ arrow: true }'
+              @click="action('follow', instance, handleAction)"
             >
-              <icon name="follow"></icon>
+              <icon name="follow" :class="{'fill-green-500': instance?.is_following}"/>
               <icon name="drag"></icon>
-              <span>0</span>
+              <span>{{instance?.meta?.total_following || 0}}</span>
               <span class="hidden md:block">followed</span>
             </div>
           </div>
@@ -236,7 +234,28 @@ export default {
       }
     }
   },
-  methods: {},
+  watch: {
+    "$store.state.auth.user"() {
+      this.$fetch()
+    }
+  },
+  methods: {
+    handleAction(tp, res) {
+      if (!this.instance.meta) {
+        this.instance.meta = {
+          total_following: 0,
+          total_joined: 0
+        }
+      }
+      if (tp === 'follow') {
+        this.instance.is_following = !this.instance.is_following
+        this.instance.meta.total_following += (this.instance.is_following ? 1 : -1)
+      } else if (tp === 'join') {
+        this.instance.is_joined = !this.instance.is_joined
+        this.instance.meta.total_joined += (this.instance.is_joined ? 1 : -1)
+      }
+    }
+  },
   mounted() {
     setInterval(() => {
       this.now = new Date()

@@ -32,7 +32,7 @@
             class="p-1 px-2 flex items-center border cursor-pointer dark:border-stone-500 rounded-xl"
             @click="login()"
           >
-            <div @click="logout()">
+            <div @click="$auth.logout()">
               <icon :name="loggedIn ? 'close': 'user'"></icon>
             </div>
             <span class="hidden md:block">
@@ -67,7 +67,6 @@ export default {
   methods: {
     ...mapActions('auth', [
       'login',
-      'logout'
     ]),
     search() {
       if (!this.name) return;
@@ -76,7 +75,7 @@ export default {
         x.replace(".eth", "")
       }
       this.$router.push(`/?search=${x}`)
-    }
+    },
   },
   computed: {
     ...mapGetters('auth', [
