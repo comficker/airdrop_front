@@ -21,7 +21,7 @@
           </nuxt-link>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-2">
         <event-card
           highlight
           v-for="item in r1.results" :key="item.id"
@@ -40,7 +40,7 @@
         </nuxt-link>
       </div>
     </div>
-    <div class="pt-4 pb-8 flex-1 space-y-3 divide-y dark:divide-stone-700 divide-dashed md:pl-4 sticky top-0">
+    <div class="pt-4 pb-8 flex-1 space-y-4 divide-y dark:divide-stone-700 divide-dashed md:pl-4 sticky top-0">
       <div class="space-y-3">
         <h3 class="font-bold uppercase flex space-x-2 items-center">
           <icon name="drag"/>
@@ -52,6 +52,17 @@
           <icon name="drag"/>
           <span>Project</span>
         </h3>
+        <div v-for="item in p.results" :key="item.id" class="flex gap-3 items-center">
+          <div class="w-6 h-6">
+            <img
+              v-if="item.media"
+              :src="`${$config.API_URI}${item.media.sizes['thumb_128']}`"
+              :alt="item.name"
+              class="rounded"
+            >
+          </div>
+          <div>{{item.name}}</div>
+        </div>
       </div>
       <div class="pt-4 space-y-3">
         <h3 class="font-bold uppercase flex space-x-2 items-center">
@@ -61,7 +72,7 @@
         <div class="grid grid-cols-10 md:grid-cols-5 gap-1">
           <div v-for="i in 20" :key="i">
             <img
-              class="rounded"
+              class="rounded-full"
               src="https://storage.googleapis.com/indie-hackers.appspot.com/avatars/300x300_z7OfFdmGGWROanM8KqZscSQ6dLi2.webp?1667236749115"
               alt="">
           </div>
@@ -80,6 +91,11 @@ export default {
   data() {
     return {
       r1: {
+        results: [],
+        count: 0,
+        num_pages: 0
+      },
+      p: {
         results: [],
         count: 0,
         num_pages: 0
@@ -118,17 +134,22 @@ export default {
     }
   },
   async fetch() {
-    const endpoint = '/project/events/'
     const r = await Promise.all([
-      this.$axios.$get(endpoint, {
+      this.$axios.$get('/project/events/', {
         params: {
           ordering: 'relevance,time_diff',
           page: this.page,
           project: this.$route.query.project
         }
       }),
+      this.$axios.$get('/project/projects/', {
+        params: {
+          page_size: 6
+        }
+      }),
     ])
     this.r1 = r[0]
+    this.p = r[1]
   }
 }
 </script>

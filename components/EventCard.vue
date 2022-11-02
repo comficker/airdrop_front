@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="mt-2 flex text-xs gap-3 items-center">
-        <div v-if="value" class="rounded gap-1 p-1.5 px-3 cursor-pointer border dark:border-gray-800 flex-1">
+        <div v-if="value" class="flex-1">
           <template>{{ eventTimeStr(now, value) }}</template>
         </div>
         <div class="p-1 cursor-pointer">
