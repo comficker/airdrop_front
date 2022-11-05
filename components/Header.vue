@@ -12,7 +12,7 @@
           class="md:relative absolute left-0 right-0 top-full pt-4 md:pt-0 z-10 md:block -mx-4 md:mx-0"
           :class="{'hidden': !showMobileMenu}"
         >
-          <div class="flex-1 flex items-center gap-3 bg-neutral-100 dark:bg-neutral-800 dark:border-stone-800 p-4 md:p-0 border md:border-none">
+          <div class="flex-1 bg-white shadow md:shadow-none flex items-center gap-3 dark:bg-neutral-800 dark:border-stone-800 p-4 md:p-0 border md:border-none">
             <div class="flex flex-col md:flex-row  gap-4 font-bold text-gray-500">
               <nuxt-link to="/" class="flex items-center gap-2">
                 <div class="w-3 h-3 flex items-center justify-center rounded-full bg-green-400">
@@ -35,10 +35,10 @@
             <div @click="$auth.logout()">
               <icon :name="loggedIn ? 'close': 'user'"></icon>
             </div>
-            <span class="hidden md:block">
+            <span>
               <icon name="drag"/>
             </span>
-            <span class="font-bold hidden md:block px-1">{{ getUserName }}</span>
+            <span class="font-bold px-1">{{ getUserName }}</span>
           </div>
         </client-only>
       </div>

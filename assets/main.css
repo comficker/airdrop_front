@@ -49,3 +49,7 @@ body {
   font-weight: bold;
   @apply text-black dark:text-white;
 }
+
+.nuxt-link-exact-active svg {
+  @apply dark:fill-white;
+}

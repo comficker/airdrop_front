@@ -1,5 +1,5 @@
 <template>
-  <div class="md:h-screen py-4">
+  <div class="md:min-h-screen py-4">
     <div class="max-w-2xl mx-auto space-y-2">
       <div v-if="instance" class="flex gap-3 text-xs">
         <div class="">{{ dateFormat(instance.date_start) }} UTC</div>
@@ -82,7 +82,10 @@
               <icon name="business"/>
               <span>Organizer</span>
             </h2>
-            <div v-if="instance && instance.project" class="flex gap-3 items-center">
+            <nuxt-link
+              v-if="instance && instance.project" class="flex gap-3 items-center"
+              :to="`/${instance.project.id_string}`"
+            >
               <div class="w-10 h-10">
                 <img
                   v-if="instance.project.media"
@@ -92,7 +95,7 @@
                 >
               </div>
               <div>{{instance.project.name}}</div>
-            </div>
+            </nuxt-link>
           </div>
           <div class="pt-4 space-y-3">
             <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">

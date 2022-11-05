@@ -2,26 +2,33 @@
   <div class="max-w-2xl mx-auto md:flex gap-4">
     <div class="space-y-3 md:w-2/3 py-4">
       <div class="flex items-center justify-between">
-        <h2 class="font-bold uppercase flex space-x-2 items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-chevron-right"
-          >
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-          <span>Ongoing Airdrops</span>
-        </h2>
+        <div class="flex gap-4">
+          <div v-if="r1.instance && r1.instance.media" class="w-10 h-10 md:w-20 md:h-20">
+            <img
+              :src="`${$config.API_URI}${r1.instance.media.sizes['thumb_128']}`"
+              :alt="r1.instance.name"
+            >
+          </div>
+          <div class="flex-1">
+            <h2 class="font-bold uppercase flex space-x-2 items-center">
+              <span v-if="!$route.params.page">Ongoing Airdrops</span>
+              <span v-else-if="$route.params.page === 'upcoming'">Upcoming Airdrops</span>
+              <span v-else-if="r1.instance">{{ r1.instance.name }} Airdrops</span>
+            </h2>
+            <p v-if="r1.instance" class="text-gray-500">{{r1.instance.desc}}</p>
+          </div>
+        </div>
         <div v-if="r1.results.length" class="flex items-center justify-center gap-3">
-          <nuxt-link v-if="paginator.previous" :to="paginator.previous" class="cursor-pointer rounded-full dark:fill-white">
-            <icon name="chevron-left" />
+          <nuxt-link v-if="paginator.previous" :to="paginator.previous"
+                     class="cursor-pointer rounded-full dark:fill-white">
+            <icon name="chevron-left"/>
           </nuxt-link>
           <nuxt-link v-if="paginator.next" :to="paginator.next" class="cursor-pointer rounded-full dark:fill-white">
-            <icon name="chevron-right" />
+            <icon name="chevron-right"/>
           </nuxt-link>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-1 gap-2">
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-3">
         <event-card
           highlight
           v-for="item in r1.results" :key="item.id"
@@ -30,13 +37,19 @@
         />
       </div>
       <div v-if="r1.results.length" class="flex justify-between gap-3">
-        <nuxt-link v-if="paginator.previous" :to="paginator.previous" class="flex items-center gap-1 items-center cursor-pointer rounded-full dark:fill-white">
-          <icon name="chevron-left" />
+        <nuxt-link
+          v-if="paginator.previous" :to="paginator.previous"
+          class="flex items-center gap-1 items-center cursor-pointer rounded-full dark:fill-white"
+        >
+          <icon name="chevron-left"/>
           <span>Previous</span>
         </nuxt-link>
-        <nuxt-link v-if="paginator.next" :to="paginator.next" class="flex items-center gap-1 items-center cursor-pointer rounded-full dark:fill-white">
+        <nuxt-link
+          v-if="paginator.next" :to="paginator.next"
+          class="flex items-center gap-1 items-center cursor-pointer rounded-full dark:fill-white"
+        >
           <span>Next</span>
-          <icon name="chevron-right" />
+          <icon name="chevron-right"/>
         </nuxt-link>
       </div>
     </div>
@@ -52,7 +65,10 @@
           <icon name="drag"/>
           <span>Project</span>
         </h3>
-        <div v-for="item in p.results" :key="item.id" class="flex gap-3 items-center">
+        <nuxt-link
+          v-for="item in p.results" :key="item.id" class="flex gap-3 items-center"
+          :to="`/${item.id_string}`"
+        >
           <div class="w-6 h-6">
             <img
               v-if="item.media"
@@ -61,8 +77,8 @@
               class="rounded"
             >
           </div>
-          <div>{{item.name}}</div>
-        </div>
+          <div>{{ item.name }}</div>
+        </nuxt-link>
       </div>
       <div class="pt-4 space-y-3">
         <h3 class="font-bold uppercase flex space-x-2 items-center">
@@ -129,7 +145,7 @@ export default {
   },
   watch: {
     "$route"() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({top: 0, behavior: 'smooth'});
       this.$fetch()
     },
     "$store.state.auth.user"() {
@@ -140,10 +156,11 @@ export default {
     const r = await Promise.all([
       this.$axios.$get('/project/events/', {
         params: {
+          ...this.$route.query,
           ordering: 'time_diff',
           page_name: this.$route.params.page || 'ongoing',
           page: this.page,
-          project: this.$route.query.project
+          project: this.$route.params.page && this.$route.params.page !== "upcoming" ? this.$route.params.page : undefined
         }
       }),
       this.$axios.$get('/project/projects/', {

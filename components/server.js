@@ -108,9 +108,13 @@ Vue.mixin({
       }
     },
     action(type, instance, callback) {
-      this.$api.event[type](instance.id, {}).then(res => {
-        callback(type, res)
-      })
+      if (this.$store.state.auth.user) {
+        this.$api.event[type](instance.id, {}).then(res => {
+          callback(type, res)
+        })
+      } else {
+        this.$store.dispatch('auth/login').then(() => {})
+      }
     },
     symbol(str) {
       if (str.length > 10) {

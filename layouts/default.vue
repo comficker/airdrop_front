@@ -1,6 +1,6 @@
 <template>
   <div :class="{dark: dark}">
-    <div class="py-6 px-4 dark:bg-neutral-800 bg-neutral-100 dark:text-white min-h-screen fill-neutral-500 dark:fill-neutral-100">
+    <div class="py-6 px-4 dark:bg-neutral-800 dark:text-white min-h-screen fill-neutral-500 dark:fill-neutral-100">
       <p-header :dark="dark"/>
       <div class="content-wrapper">
         <div class="main-wrapper">
@@ -11,13 +11,39 @@
       </div>
       <adapter/>
       <div
-        class="fixed bottom-0 right-0 left-0 bg-white border-t divide-x text-xs text-gray-500 flex items-center bg-neutral-100 dark:bg-neutral-800 dark:border-neutral-700 dark:divide-neutral-700">
-        <div class="p-3 py-1">Copyright © 2022 ongoingairdrop.com</div>
+        class="fixed bottom-0 right-0 left-0 bg-white border-t text-xs text-gray-500 flex items-center dark:bg-neutral-800 dark:border-neutral-700 divide-x dark:divide-neutral-700">
+        <div class="p-3 py-1 flex gap-2">
+          <span>Copyright©2022</span>
+          <span class="hidden md:block">ongoingairdrop.com</span>
+        </div>
         <div class="p-3 py-1 flex space-x-3 fill-gray-500">
           <icon name="twitter"/>
           <icon name="discord" vb="128"/>
         </div>
-        <div class="flex-1 flex justify-end fill-gray-500 items-center">
+        <div class="flex-1 flex justify-end fill-gray-500 items-center divide-x dark:divide-neutral-700">
+          <template v-if="$store.state.auth.user">
+            <nuxt-link
+              class="p-3 py-1 cursor-pointer flex gap-2 items-center dark:fill-gray-500"
+              :to="`/${path}?is_mine=true`"
+            >
+              <icon name="note"/>
+              <span class="hidden md:block">My posts</span>
+            </nuxt-link>
+            <nuxt-link
+              class="p-3 py-1 cursor-pointer flex gap-2 items-center dark:fill-gray-500"
+              :to="`/${path}?is_following=true`"
+            >
+              <icon name="follow"/>
+              <span class="hidden md:block">My following</span>
+            </nuxt-link>
+            <nuxt-link
+              class="p-3 py-1 cursor-pointer flex gap-2 items-center dark:fill-gray-500"
+              :to="`/${path}?is_joined=true`"
+            >
+              <icon name="check"/>
+              <span class="hidden md:block">My Joined</span>
+            </nuxt-link>
+          </template>
           <div
             class="p-3 py-1 cursor-pointer"
             :class="{'fill-green-500': dark}"
@@ -71,6 +97,14 @@ export default {
   data() {
     return {
       dark: this.$ck.get("darkmode")
+    }
+  },
+  computed: {
+    path() {
+      if (this.$route.name === 'event-page') {
+        return ''
+      }
+      return this.$route.path
     }
   },
   methods: {

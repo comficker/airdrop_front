@@ -1,6 +1,6 @@
 <template>
   <client-only>
-    <div class="max-w-2xl mx-auto py-8 space-y-4">
+    <div class="max-w-2xl mx-auto py-4 space-y-4">
       <div>
         <h1 class="font-bold uppercase flex space-x-2 items-center">
           <icon name="pen"></icon>
