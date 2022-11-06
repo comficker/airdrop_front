@@ -15,12 +15,15 @@
               <span v-else-if="$route.params.page === 'upcoming'">Upcoming Airdrops</span>
               <span v-else-if="r1.instance">{{ r1.instance.name }} Airdrops</span>
             </h2>
-            <p v-if="r1.instance" class="text-gray-500">{{r1.instance.desc}}</p>
+            <p v-if="r1.instance" class="text-gray-500"><span :class="{'line-3': !expandDesc}">{{ r1.instance.desc }}</span> <span
+              class="cursor-pointer text-blue-500" @click="expandDesc = !expandDesc">{{ expandDesc ? 'less' : 'more' }}</span></p>
           </div>
         </div>
         <div v-if="r1.results.length" class="flex items-center justify-center gap-3">
-          <nuxt-link v-if="paginator.previous" :to="paginator.previous"
-                     class="cursor-pointer rounded-full dark:fill-white">
+          <nuxt-link
+            v-if="paginator.previous" :to="paginator.previous"
+            class="cursor-pointer rounded-full dark:fill-white"
+          >
             <icon name="chevron-left"/>
           </nuxt-link>
           <nuxt-link v-if="paginator.next" :to="paginator.next" class="cursor-pointer rounded-full dark:fill-white">
@@ -115,10 +118,49 @@ export default {
         results: [],
         count: 0,
         num_pages: 0
-      }
+      },
+      expandDesc: false
+    }
+  },
+  head() {
+    return {
+      title: this.meta.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.meta.desc,
+        },
+        {
+          property: 'og:title',
+          hid: 'og:title',
+          name: 'og:title',
+          content: this.meta.title,
+        },
+        {
+          property: 'og:description',
+          hid: 'og:description',
+          name: 'og:description',
+          content: this.meta.desc,
+        },
+      ]
     }
   },
   computed: {
+    meta() {
+      let title = 'Ongoing Airdrops'
+      let desc;
+      if (this.$route.params.page === 'upcoming') {
+        title = 'Upcoming Airdrops'
+      } else if (this.r1.instance) {
+        title = `${this.r1.instance.name} Airdrops`
+        desc = this.r1.instance.desc
+      }
+      return {
+        title,
+        desc
+      }
+    },
     page() {
       return Number.parseInt(this.$route.query.page || "1")
     },
