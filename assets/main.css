@@ -62,3 +62,7 @@ body {
 .nuxt-link-exact-active svg {
   @apply dark:fill-white;
 }
+
+.square {
+  padding-top: 100%;
+}

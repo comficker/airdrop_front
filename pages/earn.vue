@@ -20,12 +20,12 @@
               <ul role="list">
                 <li>
                   <div class="relative pb-6">
-                    <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                    <span class="absolute top-5 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
                     <div class="relative flex items-start space-x-3">
                       <div>
                         <div class="relative px-1">
                           <div
-                            class="flex h-8 w-8 items-center justify-center rounded-full ring-8 ring-white dark:ring-stone-800"
+                            class="flex h-6 w-6 items-center justify-center rounded-full ring-6 ring-white dark:ring-stone-800"
                             :class="{
                               'bg-green-500': profile && profile.refer_code,
                               'bg-gray-100': !(profile && profile.refer_code)
@@ -35,7 +35,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="min-w-0 flex-1 py-1.5 space-y-2">
+                      <div class="min-w-0 flex-1 py-1 space-y-2">
                         <div class="text-sm text-gray-500 dark:text-gray-200 flex justify-between">
                           <span>Create referral code</span>
                         </div>
@@ -56,12 +56,12 @@
                 </li>
                 <li v-for="item in verification_list" :key="item.id">
                   <div class="relative pb-6">
-                    <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                    <div class="relative flex items-start space-x-3">
+                    <span class="absolute top-5 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                    <div class="relative flex items-center space-x-3">
                       <div>
                         <div class="relative px-1">
                           <div
-                            class="flex h-8 w-8 items-center justify-center rounded-full ring-8 ring-white dark:ring-stone-800"
+                            class="flex h-6 w-6 items-center justify-center rounded-full ring-6 ring-white dark:ring-stone-800"
                             :class="{
                               'bg-green-500': countVal(item.id) >= item.target,
                               'bg-gray-100': countVal(item.id) < item.target
@@ -71,7 +71,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="min-w-0 flex-1 py-1.5">
+                      <div class="min-w-0 flex-1 py-1">
                         <div class="text-gray-500 dark:text-gray-200 flex justify-between">
                           <span>{{ item.title }}</span>
                           <span>{{ countVal(item.id) }}/{{ item.target }}</span>
@@ -80,7 +80,7 @@
                         <div v-if="item.id === 'invite_friend'">
                           <input
                             disabled
-                            :value="`https://ongoingairdrop.com/?refer=${refer_code}`"
+                            :value="url"
                             class="mt-2 dark:bg-stone-900 outline-none p-2 py-2 flex-1 w-full text-gray-500" type="text"
                             placeholder="todo"
                           >
@@ -179,6 +179,11 @@ export default {
     }
   },
   computed: {
+    url() {
+      let url = process.client ? window.location.href : ''
+      url = url + "?refer=" + this.refer_code
+      return url
+    },
     isVerified() {
       return false
     },
@@ -231,10 +236,10 @@ export default {
       }
     },
     async fetchTransaction() {
-      if (this.$store.state.auth.user && this.$store.state.auth.user.profile) {
-        this.transaction = await this.$axios.$get('/auth/transactions', {
+      if (this.isLogged) {
+        this.transaction = await this.$axios.$get('/auth/transactions/', {
           params: {
-            profile: this.$store.state.auth.user.profile
+            profile: this.$store.state.auth.user.id
           }
         }).catch(() => ({
           results: []
@@ -242,8 +247,8 @@ export default {
       }
     },
     async fetchProfiles() {
-      if (!this.$store.state.auth.user) {
-        this.topEarn = this.$axios.$get('/auth/profiles', {
+      if (!this.isLogged) {
+        this.topEarn = this.$axios.$get('/auth/profiles/', {
           params: {
             ordering: 'credits'
           }
@@ -273,6 +278,12 @@ export default {
     this.fetchProfile()
     this.fetchTransaction()
     this.fetchProfiles()
+  },
+  watch: {
+    isLogged() {
+      this.fetchTransaction()
+      this.fetchProfiles()
+    }
   }
 }
 </script>

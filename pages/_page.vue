@@ -58,13 +58,13 @@
     </div>
     <div class="pt-4 pb-8 flex-1 space-y-4 divide-y dark:divide-stone-700 divide-dashed md:pl-4 sticky top-0">
       <div class="space-y-3">
-        <h3 class="font-bold uppercase flex space-x-2 items-center">
+        <h3 class="font-bold uppercase flex space-x-2 items-center text-sm">
           <icon name="drag"/>
           <span>Activity</span>
         </h3>
       </div>
       <div class="pt-4 space-y-3">
-        <h3 class="font-bold uppercase flex space-x-2 items-center">
+        <h3 class="font-bold uppercase flex space-x-2 items-center text-sm">
           <icon name="drag"/>
           <span>Project</span>
         </h3>
@@ -84,16 +84,22 @@
         </nuxt-link>
       </div>
       <div class="pt-4 space-y-3">
-        <h3 class="font-bold uppercase flex space-x-2 items-center">
+        <h3 class="font-bold uppercase flex space-x-2 items-center text-sm">
           <icon name="drag"/>
           <span>Hunter</span>
         </h3>
         <div class="grid grid-cols-10 md:grid-cols-5 gap-1">
-          <div v-for="i in 20" :key="i">
+          <div v-for="(item, i) in topEarn.results" :key="i">
             <img
+              v-if="item.media"
               class="rounded-full"
-              src="https://storage.googleapis.com/indie-hackers.appspot.com/avatars/300x300_z7OfFdmGGWROanM8KqZscSQ6dLi2.webp?1667236749115"
+              :src="`${$config.API_URI}${item.media.sizes['thumb_128']}`"
               alt="">
+            <div v-else class="square relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <icon name="user" class="lg ring-4 ring-gray-200 dark:ring-stone-700 rounded-full"/>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -115,6 +121,11 @@ export default {
         num_pages: 0
       },
       p: {
+        results: [],
+        count: 0,
+        num_pages: 0
+      },
+      topEarn: {
         results: [],
         count: 0,
         num_pages: 0
@@ -213,6 +224,20 @@ export default {
     ])
     this.r1 = r[0]
     this.p = r[1]
+  },
+  methods: {
+    async fetchProfiles() {
+      this.topEarn = await this.$axios.$get('/auth/profiles/', {
+        params: {
+          ordering: 'credits'
+        }
+      }).catch(() => ({
+        results: []
+      }))
+    }
+  },
+  mounted() {
+    this.fetchProfiles()
   }
 }
 </script>
