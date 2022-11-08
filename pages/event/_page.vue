@@ -202,7 +202,7 @@ export default {
     const res = await Promise.all([
       this.$axios.$get(`/project/events/${this.$route.params.page}/`, {
         params: {
-          referral_code: this.$ck.get('auth.referral_code')
+          refer_code: this.$ck.get('auth.referral_code')
         }
       }),
       this.$axios.$get(`/project/events/`, {

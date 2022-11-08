@@ -26,7 +26,7 @@ export default async function (context, inject) {
     try {
       return await context.$axios.$get('/auth/user', {
         params: {
-          referral_code: context.store.$ck.get('auth.referral_code')
+          refer_code: context.store.$ck.get('auth.referral_code')
         }
       });
     } catch (e) {
