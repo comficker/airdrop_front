@@ -10,7 +10,9 @@ export default {
   },
   actions: {
     login(context) {
-      context.commit('config/SET_MODAL', {type: "auth"}, {root: true})
+      if (!context.state.user) {
+        context.commit('config/SET_MODAL', {type: "auth"}, {root: true})
+      }
     },
     logout(context) {
       context.commit('SET_USER', null);
@@ -18,7 +20,7 @@ export default {
   },
   getters: {
     getUserName: state => {
-      return state.user ? `${state.user.username}` : 'login';
+      return state.user ? `${state.user.user.username}` : 'login';
     },
     loggedIn: state => {
       return !!Boolean(state.user)

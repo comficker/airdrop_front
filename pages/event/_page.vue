@@ -1,6 +1,6 @@
 <template>
   <div class="md:min-h-screen py-4">
-    <div class="max-w-2xl mx-auto space-y-2">
+    <div class="max-w-3xl mx-auto space-y-2">
       <div v-if="instance" class="flex gap-3 text-xs">
         <div class="">{{ dateFormat(instance.date_start) }} UTC</div>
         <div class="text-gray-500">{{ eventTimeStr(now, instance) }}</div>
@@ -19,11 +19,11 @@
         <template v-if="instance">{{ instance.desc }}</template>
       </p>
     </div>
-    <div class="max-w-2xl mx-auto">
+    <div class="max-w-3xl mx-auto">
       <div class="md:flex gap-4 h-full">
         <div class="flex-1 py-4 space-y-4 divide-y dark:divide-stone-700 divide-dashed h-full">
           <div v-if="instance" class="space-y-2">
-            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">
+            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-sm">
               <icon name="prize"></icon>
               <span>Reward</span>
             </h2>
@@ -35,37 +35,8 @@
               <p class="text-xs text-gray-500">{{ item.note }}</p>
             </template>
           </div>
-          <div class="pt-4">
-            <a
-              v-if="instance" :href="instance.url" target="_blank" rel="nofollow"
-              class="flex gap-1 rounded justify-center p-2 px-3 cursor-pointer items-center bg-green-600 text-white dark:fill-white fill-white w-full"
-            >
-              <icon name="join"></icon>
-              <span>Join</span>
-            </a>
-          </div>
-          <div class="pt-4 grid grid-cols-2 gap-4">
-            <div
-              class="rounded flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-gray-500"
-              @click="action('join', instance, handleAction)"
-            >
-              <icon name="check" :class="{'fill-green-500': instance?.is_joined}"/>
-              <icon name="drag"/>
-              <span>{{instance?.meta?.total_joined || 0}}</span>
-              <span class="hidden md:block">joined</span>
-            </div>
-            <div
-              class="rounded flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-gray-500"
-              @click="action('follow', instance, handleAction)"
-            >
-              <icon name="follow" :class="{'fill-green-500': instance?.is_following}"/>
-              <icon name="drag"></icon>
-              <span>{{instance?.meta?.total_following || 0}}</span>
-              <span class="hidden md:block">followed</span>
-            </div>
-          </div>
           <div class="pt-4 space-y-2" v-if="instance">
-            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">
+            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-sm">
               <icon name="tasks"></icon>
               <span>Tasks</span>
             </h2>
@@ -74,11 +45,77 @@
               <div>{{ item }}</div>
             </div>
           </div>
+          <div class="pt-4 grid grid-cols-2 gap-4">
+            <div
+              class="rounded flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-gray-700"
+              @click="action('join', instance, handleAction)"
+            >
+              <icon name="check" :class="{'fill-green-500': instance?.is_joined}"/>
+              <icon name="drag"/>
+              <span>{{instance?.meta?.total_joined || 0}}</span>
+              <span class="hidden md:block">joined</span>
+            </div>
+            <div
+              class="rounded flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-gray-700"
+              @click="action('follow', instance, handleAction)"
+            >
+              <icon name="follow" :class="{'fill-green-500': instance?.is_following}"/>
+              <icon name="drag"></icon>
+              <span>{{instance?.meta?.total_following || 0}}</span>
+              <span class="hidden md:block">followed</span>
+            </div>
+          </div>
+          <div class="pt-4 space-y-3">
+            <div class="font-bold uppercase flex justify-between items-center text-gray-500 text-sm">
+              <div class="flex gap-2">
+                <icon name="share"></icon>
+                <span>Share with your friends</span>
+              </div>
+              <div v-if="referCode" class="flex gap-2">
+                <input v-model="isIncludeRC" type="checkbox">
+                <span>Include refer code</span>
+              </div>
+            </div>
+            <input
+              disabled
+              :value="social.url"
+              class="dark:bg-stone-900 outline-none p-2 py-2 flex-1 w-full text-gray-500" type="text"
+              placeholder="todo"
+            >
+            <div class="grid md:grid-cols-2 gap-4 text-center font-bold">
+              <div class="">
+                <ShareNetwork
+                  class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-500 hover:dark:bg-blue-500 rounded text-black hover:text-white dark:text-white duration-300"
+                  network="facebook"
+                  :url="social.url"
+                  :title="social.title"
+                  :description="social.desc"
+                  :quote="social.quote"
+                  :hashtags="social.tags"
+                >
+                  Share on facebook
+                </ShareNetwork>
+              </div>
+              <div class="">
+                <ShareNetwork
+                  class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-400 hover:dark:bg-blue-500 rounded text-black hover:text-white dark:text-white duration-300"
+                  network="twitter"
+                  :url="social.url"
+                  :title="social.title"
+                  :description="social.desc"
+                  :quote="social.quote"
+                  :hashtags="social.tags"
+                >
+                  Share on twitter
+                </ShareNetwork>
+              </div>
+            </div>
+          </div>
           <comment-box class="pt-4"/>
         </div>
         <div class="md:pl-4 py-4 md:w-2/5 space-y-4 divide-y divide-dashed dark:divide-stone-800">
           <div class="space-y-3">
-            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">
+            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-sm">
               <icon name="business"/>
               <span>Organizer</span>
             </h2>
@@ -98,7 +135,7 @@
             </nuxt-link>
           </div>
           <div class="pt-4 space-y-3">
-            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500">
+            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-sm">
               <icon name="timeline"/>
               <span>Timeline</span>
             </h2>
@@ -115,33 +152,14 @@
               </div>
             </div>
           </div>
-          <div class="pt-4 grid md:grid-cols-1 gap-4 text-center font-bold">
-            <div class="">
-              <ShareNetwork
-                class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-500 hover:dark:bg-blue-500 rounded text-black hover:text-white dark:text-white duration-300"
-                network="facebook"
-                :url="social.url"
-                :title="social.title"
-                :description="social.desc"
-                :quote="social.quote"
-                :hashtags="social.tags"
-              >
-                Share on facebook
-              </ShareNetwork>
-            </div>
-            <div class="">
-              <ShareNetwork
-                class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-400 hover:dark:bg-blue-500 rounded text-black hover:text-white dark:text-white duration-300"
-                network="twitter"
-                :url="social.url"
-                :title="social.title"
-                :description="social.desc"
-                :quote="social.quote"
-                :hashtags="social.tags"
-              >
-                Share on twitter
-              </ShareNetwork>
-            </div>
+          <div class="pt-4">
+            <a
+              v-if="instance" :href="`${instance.url}?source=ongoingairdrop.com`" target="_blank" rel="nofollow"
+              class="flex gap-1 rounded justify-center p-2 px-3 cursor-pointer items-center bg-green-600 text-white dark:fill-white fill-white w-full"
+            >
+              <icon name="join"></icon>
+              <span>Join</span>
+            </a>
           </div>
         </div>
       </div>
@@ -176,12 +194,17 @@ export default {
       res: {
         results: [null, null, null, null, null],
         count: 0
-      }
+      },
+      isIncludeRC: true
     }
   },
   async fetch() {
     const res = await Promise.all([
-      this.$axios.$get(`/project/events/${this.$route.params.page}/`),
+      this.$axios.$get(`/project/events/${this.$route.params.page}/`, {
+        params: {
+          referral_code: this.$ck.get('auth.referral_code')
+        }
+      }),
       this.$axios.$get(`/project/events/`, {
         params: {
           related: this.$route.params.page,
@@ -224,17 +247,27 @@ export default {
       }
       return {
         title: this.instance.title,
-        desc: this.instance.desc
+        desc: this.instance.desc,
       }
     },
     social() {
+      let url = process.client ? window.location.href : ''
+      if (this.isIncludeRC && this.referCode) {
+        url = url + "?refer=" + this.referCode
+      }
       return {
         title: this.meta.title + ' ' + (this.instance ? this.eventTimeStr(this.now, this.instance) : ''),
         desc: this.meta.desc,
         quote: this.instance?.desc,
-        url: process.client ? window.location.href : '',
+        url: url,
         tags: `${this.instance?.name},Outage`
       }
+    },
+    referCode() {
+      if (this.$store.state.auth.user && this.$store.state.auth.user.refer_code) {
+        return this.$store.state.auth.user.refer_code
+      }
+      return null
     }
   },
   watch: {

@@ -24,7 +24,11 @@ export default async function (context, inject) {
   };
   const getUser = async () => {
     try {
-      return await context.$axios.$get('/auth/user');
+      return await context.$axios.$get('/auth/user', {
+        params: {
+          referral_code: context.store.$ck.get('auth.referral_code')
+        }
+      });
     } catch (e) {
       if (e.response && e.response.status === 401) {
         await logout();

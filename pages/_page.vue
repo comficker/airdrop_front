@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-2xl mx-auto md:flex gap-4">
+  <div class="max-w-3xl mx-auto md:flex gap-4">
     <div class="space-y-3 md:w-2/3 py-4">
       <div class="flex items-center justify-between">
         <div class="flex gap-4">

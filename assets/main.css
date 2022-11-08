@@ -33,7 +33,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
   font-family: Proto Mono, serif;
-  font-size: 14px;
+  /*font-size: 14px;*/
 }
 
 .a-line {

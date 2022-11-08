@@ -20,7 +20,7 @@
         <div class="flex space-x-3 justify-between">
           <div class="flex justify-center space-x-1 items-center text-xs">
           </div>
-          <div class="cursor-pointer px-6 text-xs p-2 bg-green-500 rounded-full text-white font-bold" @click="send">Send</div>
+          <div class="cursor-pointer px-6 p-2 bg-green-500 rounded-full text-white font-bold" @click="send">Send</div>
         </div>
       </div>
     </div>

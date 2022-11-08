@@ -8,11 +8,11 @@
         <template v-if="value">{{ dateFormat(value.date_start) }} UTC</template> <span class="text-red-400">{{ eventTimeStr(now, value) }}</span>
       </div>
       <div class="flex gap-4">
-        <div class="text-xs flex-1 font-semibold space-y-2">
+        <div class="flex-1 font-semibold space-y-2">
           <div class="font-bold a-line text-green-900 dark:text-white uppercase">
             <nuxt-link v-if="value" :to="`/event/${value.id_string}`">{{ value.title }}</nuxt-link>
           </div>
-          <div class="flex gap-3">
+          <div class="text-xs flex gap-3">
             <div v-if="value" class="flex gap-1">
               <icon class="sm" name="prize"></icon>
               <template v-for="item in value.prizes">
@@ -27,7 +27,7 @@
               <span class="text-gray-400">tasks</span>
             </div>
           </div>
-          <div class="flex gap-3 items-center justify-between">
+          <div class="text-xs flex gap-3 items-center justify-between">
             <nuxt-link
               v-if="value && value.project" class="flex gap-2 items-center"
               :to="`/${value.project.id_string}`"

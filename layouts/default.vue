@@ -22,17 +22,11 @@
         </div>
         <div class="flex-1 flex justify-end fill-gray-500 items-center divide-x dark:divide-neutral-700">
           <template v-if="$store.state.auth.user">
-            <nuxt-link
-              class="p-3 py-1 cursor-pointer flex gap-2 items-center dark:fill-gray-500"
-              :to="`/${path}?is_mine=true`"
-            >
+            <nuxt-link class="p-3 py-1 cursor-pointer flex gap-2 items-center dark:fill-gray-500" :to="`/${path}?is_mine=true`">
               <icon name="note"/>
               <span class="hidden md:block">My posts</span>
             </nuxt-link>
-            <nuxt-link
-              class="p-3 py-1 cursor-pointer flex gap-2 items-center dark:fill-gray-500"
-              :to="`/${path}?is_following=true`"
-            >
+            <nuxt-link class="p-3 py-1 cursor-pointer flex gap-2 items-center dark:fill-gray-500" :to="`/${path}?is_following=true`">
               <icon name="follow"/>
               <span class="hidden md:block">My following</span>
             </nuxt-link>
@@ -44,11 +38,21 @@
               <span class="hidden md:block">My Joined</span>
             </nuxt-link>
           </template>
+          <nuxt-link class="p-3 py-1 cursor-pointer flex gap-2 items-center dark:text-white" to="/submit">
+            <icon name="plus" class="dark:fill-white"/>
+            <span>Submit</span>
+          </nuxt-link>
           <div
             class="p-3 py-1 cursor-pointer"
             :class="{'fill-green-500': dark}"
             @click="dark = !dark">
             <icon name="sun"/>
+          </div>
+          <div
+            v-if="$store.state.auth.user"
+            class="p-3 py-1 cursor-pointer"
+            @click="$auth.logout()">
+            <icon name="out"/>
           </div>
         </div>
       </div>
@@ -124,6 +128,12 @@ export default {
   },
   mounted() {
     this.switch()
+    if (this.$route.query.refer) {
+      this.$ck.set('auth.referral_code', this.$route.query.refer, {
+        maxAge: 60 * 60 * 24 * 7,
+        path: '/'
+      })
+    }
   }
 }
 </script>

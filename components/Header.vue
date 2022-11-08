@@ -1,6 +1,6 @@
 <template>
   <header class="px-4 -mx-4 pb-4">
-    <div class="max-w-2xl mx-auto flex gap-4 items-center justify-between font-bold relative">
+    <div class="max-w-3xl mx-auto flex gap-4 items-center justify-between font-bold relative">
       <div class="flex-1 flex items-center gap-6">
         <nuxt-link class="w-32" to="/">
           <img :src="`/logo${dark ? '-dark': ''}.png`" alt="Ongoing Airdrop">
@@ -21,23 +21,22 @@
                 <span>Ongoing</span>
               </nuxt-link>
               <nuxt-link to="/upcoming">Upcoming</nuxt-link>
-              <nuxt-link to="/submit">Submit</nuxt-link>
             </div>
           </div>
         </div>
       </div>
-      <div class="flex-1 flex justify-end">
+      <div class="flex-1 flex gap-4 justify-end">
+        <nuxt-link to="/earn" class="flex items-center items-center gap-2">
+          <icon name="cash" class="dark:fill-yellow-500"/>
+          <span>Earn</span>
+        </nuxt-link>
         <client-only>
           <div
             class="p-1 px-2 flex items-center border cursor-pointer dark:border-stone-500 rounded-xl"
             @click="login()"
           >
-            <div @click="$auth.logout()">
-              <icon :name="loggedIn ? 'close': 'user'"></icon>
-            </div>
-            <span>
-              <icon name="drag"/>
-            </span>
+            <icon name="user"/>
+            <icon name="drag"/>
             <span class="font-bold px-1">{{ getUserName }}</span>
           </div>
         </client-only>
