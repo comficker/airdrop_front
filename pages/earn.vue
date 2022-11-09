@@ -113,7 +113,7 @@
             <span class="underline text-gray-500">Claim</span>
           </div>
         </div>
-        <table class="table-fixed w-full divide-y dark:divide-stone-700">
+        <table class="table-fixed w-full divide-y dark:divide-stone-700 text-xs">
           <thead>
           <tr class="text-gray-500">
             <th scope="col" class="py-1.5 text-left">Action</th>
@@ -125,13 +125,13 @@
           <tr v-for="item in transaction.results" :key="item.id">
             <td class="py-1.5 text-left">{{ item.action_name }}</td>
             <td class="py-1.5 text-center">{{ item.value }}</td>
-            <td class="py-1.5 text-right">{{ item.created }}</td>
+            <td class="py-1.5 text-right">{{ dateFormat(item.created) }}</td>
           </tr>
           </tbody>
         </table>
       </template>
       <div v-else class="space-y-2">
-        <div class="font-bold uppercase flex space-x-2 items-center text-gray-500">
+        <div class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
           <icon name="prize"/>
           <span>Top by earned</span>
         </div>
