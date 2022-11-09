@@ -108,7 +108,7 @@
       <template v-if="isLogged">
         <div class="text-center">
           <div>Balance</div>
-          <div class="text-6xl text-green-500 font-bold">{{ profile?.credits || 0 }}</div>
+          <div class="text-6xl text-green-500 font-bold">{{ formatNum(profile?.credits) || 0 }}</div>
           <div>
             <span class="underline text-gray-500">Claim</span>
           </div>
@@ -118,14 +118,14 @@
           <tr class="text-gray-500">
             <th scope="col" class="py-1.5 text-left">Action</th>
             <th scope="col" class="py-1.5 text-center">Earned</th>
-            <th scope="col" class="py-1.5 text-right">Action</th>
+            <th scope="col" class="py-1.5 text-right">Timestamp</th>
           </tr>
           </thead>
           <tbody class="divide-y dark:divide-stone-700 divide-dashed">
-          <tr>
-            <td class="py-1.5 text-left">Create event</td>
-            <td class="py-1.5 text-center">0</td>
-            <td class="py-1.5 text-right">0</td>
+          <tr v-for="item in transaction.results" :key="item.id">
+            <td class="py-1.5 text-left">{{ item.action_name }}</td>
+            <td class="py-1.5 text-center">{{ item.value }}</td>
+            <td class="py-1.5 text-right">{{ item.created }}</td>
           </tr>
           </tbody>
         </table>
@@ -144,10 +144,10 @@
           </tr>
           </thead>
           <tbody class="divide-y dark:divide-stone-700 divide-dashed">
-          <tr>
-            <td class="py-1.5 text-left">#1</td>
-            <td class="py-1.5 text-left">Lam</td>
-            <td class="py-1.5 text-right">0</td>
+          <tr v-for="(item, i) in topEarn.results" :key="item.id">
+            <td class="py-1.5 text-left">#{{ i + 1 }}</td>
+            <td class="py-1.5 text-left">{{ item.user.username }}</td>
+            <td class="py-1.5 text-right">{{ formatNum(item.credits) }}</td>
           </tr>
           </tbody>
         </table>
@@ -226,13 +226,15 @@ export default {
       'login',
     ]),
     async fetchProfile() {
-      let profile = 0
-      if (this.$store.state.auth.user) {
-        profile = this.$store.state.auth.user.id
-      }
-      this.profile = await this.$axios.$get(`/auth/profiles/${profile}/`).catch(() => null)
-      if (this.profile) {
-        this.refer_code = this.profile.refer_code
+      if (this.isLogged) {
+        let profile = 0
+        if (this.$store.state.auth.user) {
+          profile = this.$store.state.auth.user.id
+        }
+        this.profile = await this.$axios.$get(`/auth/profiles/${profile}/`).catch(() => null)
+        if (this.profile) {
+          this.refer_code = this.profile.refer_code
+        }
       }
     },
     async fetchTransaction() {
@@ -248,7 +250,7 @@ export default {
     },
     async fetchProfiles() {
       if (!this.isLogged) {
-        this.topEarn = this.$axios.$get('/auth/profiles/', {
+        this.topEarn = await this.$axios.$get('/auth/profiles/', {
           params: {
             ordering: 'credits'
           }
@@ -272,6 +274,10 @@ export default {
         return this.profile.achievements[flag]
       }
       return 0
+    },
+    formatNum(number) {
+      if (!number) return 0
+      return Number.parseFloat(number.toFixed(3)).toLocaleString()
     }
   },
   mounted() {
@@ -281,6 +287,7 @@ export default {
   },
   watch: {
     isLogged() {
+      this.fetchProfile()
       this.fetchTransaction()
       this.fetchProfiles()
     }
