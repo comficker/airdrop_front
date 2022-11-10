@@ -1,6 +1,6 @@
 <template>
   <div
-    class="border rounded bg-white dark:border-stone-800 dark:bg-neutral-900/50 hover:border-gray-200 dark:hover:border-stone-800 hover:shadow duration-200 p-3 group flex gap-3"
+    class="border bg-white dark:border-stone-800 dark:bg-neutral-900/50 hover:border-gray-200 dark:hover:border-stone-800 hover:shadow duration-200 p-3 group flex gap-3"
     :class="{'dark:md:border-transparent md:border-transparent': !highlight}"
   >
     <div class="flex-1 space-y-2">

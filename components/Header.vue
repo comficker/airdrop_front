@@ -1,7 +1,7 @@
 <template>
   <header class="px-4 -mx-4 pb-4">
     <div class="max-w-3xl mx-auto flex gap-4 items-center justify-between font-bold relative">
-      <div class="flex-1 flex items-center gap-6">
+      <div class="md:-ml-6 flex-1 flex items-center gap-6">
         <nuxt-link class="w-32" to="/">
           <img :src="`/logo${dark ? '-dark': ''}.png`" alt="Ongoing Airdrop">
         </nuxt-link>
