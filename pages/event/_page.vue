@@ -84,7 +84,7 @@
             <textarea
               disabled
               :value="social.url"
-              class="dark:bg-stone-900 font-mono outline-none p-2 py-2 flex-1 w-full text-gray-500" type="text"
+              class="dark:bg-neutral-700 font-mono outline-none p-2 py-2 flex-1 w-full text-gray-500" type="text"
               placeholder="todo"
             ></textarea>
             <div class="grid md:grid-cols-2 gap-4 text-center font-bold">
