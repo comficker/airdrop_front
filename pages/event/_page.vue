@@ -42,7 +42,7 @@
             </h2>
             <div
               v-for="(item, i) in instance.tasks" :key="i"
-              class="flex gap-2 items-center font-semibold border border-gray-100 dark:border-neutral-700 p-2"
+              class="flex gap-2 items-center font-semibold border border-gray-100 dark:border-neutral-700 p-2 text-base"
             >
               <icon name="plus"></icon>
               <div>{{ item }}</div>
