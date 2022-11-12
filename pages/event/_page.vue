@@ -6,7 +6,7 @@
         <div class="text-gray-500">{{ eventTimeStr(now, instance) }}</div>
       </div>
       <h1
-        class="text-4xl text-green-900 font-extrabold dark:text-green-300"
+        class="text-3xl text-green-900 font-semibold dark:text-green-300"
         :class="{'h-10 w-32 bg-gray-200 dark:bg-stone-900 animate-pulse mb-2': !instance}"
         :style="!instance ? {width: `45%`} : undefined"
       >
@@ -23,7 +23,7 @@
       <div class="md:flex gap-4 h-full">
         <div class="flex-1 py-4 space-y-4 divide-y dark:divide-stone-700 divide-dashed h-full">
           <div v-if="instance" class="space-y-2">
-            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-sm">
+            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
               <icon name="prize"></icon>
               <span>Reward</span>
             </h2>
@@ -36,7 +36,7 @@
             </template>
           </div>
           <div class="pt-4 space-y-2" v-if="instance">
-            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-sm">
+            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
               <icon name="tasks"></icon>
               <span>Tasks</span>
             </h2>
@@ -47,7 +47,7 @@
           </div>
           <div class="pt-4 grid grid-cols-2 gap-4">
             <div
-              class="rounded flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-gray-700"
+              class="rounded flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-neutral-700"
               @click="action('join', instance, handleAction)"
             >
               <icon name="check" :class="{'fill-green-500': instance?.is_joined}"/>
@@ -56,7 +56,7 @@
               <span class="hidden md:block">joined</span>
             </div>
             <div
-              class="rounded flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-gray-700"
+              class="rounded flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-neutral-700"
               @click="action('follow', instance, handleAction)"
             >
               <icon name="follow" :class="{'fill-green-500': instance?.is_following}"/>
@@ -66,7 +66,7 @@
             </div>
           </div>
           <div class="pt-4 space-y-3">
-            <div class="font-bold uppercase flex justify-between items-center text-gray-500 text-sm">
+            <div class="font-bold uppercase flex justify-between items-center text-gray-500 text-xs">
               <div class="flex gap-2">
                 <icon name="share"></icon>
                 <span>Share with your friends</span>
@@ -115,7 +115,7 @@
         </div>
         <div class="md:pl-4 py-4 md:w-2/5 space-y-4 divide-y divide-dashed dark:divide-stone-800">
           <div class="space-y-3">
-            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-sm">
+            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
               <icon name="business"/>
               <span>Organizer</span>
             </h2>
@@ -135,7 +135,7 @@
             </nuxt-link>
           </div>
           <div class="pt-4 space-y-3">
-            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-sm">
+            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
               <icon name="timeline"/>
               <span>Timeline</span>
             </h2>

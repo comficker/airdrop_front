@@ -58,33 +58,34 @@
     </div>
     <div class="pt-4 pb-8 flex-1 space-y-4 divide-y dark:divide-stone-700 divide-dashed md:pl-4 sticky top-0">
       <div class="space-y-3">
-        <h3 class="font-bold uppercase flex space-x-2 items-center text-sm">
+        <h3 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
           <icon name="drag"/>
           <span>Activity</span>
         </h3>
       </div>
       <div class="pt-4 space-y-3">
-        <h3 class="font-bold uppercase flex space-x-2 items-center text-sm">
+        <h3 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
           <icon name="drag"/>
           <span>Project</span>
         </h3>
         <nuxt-link
-          v-for="item in p.results" :key="item.id" class="flex gap-3 items-center"
+          v-for="item in p.results" :key="item.id" class="flex gap-2 items-center text-gray-800 dark:text-gray-100"
           :to="`/${item.id_string}`"
         >
-          <div class="w-6 h-6">
+          <div class="w-5 h-5">
             <img
               v-if="item.media"
               :src="`${$config.API_URI}${item.media.sizes['thumb_128']}`"
               :alt="item.name"
               class="rounded"
             >
+            <icon v-else name="thumb"/>
           </div>
-          <div>{{ item.name }}</div>
+          <div class="font-semibold">{{ item.name }}</div>
         </nuxt-link>
       </div>
       <div class="pt-4 space-y-3">
-        <h3 class="font-bold uppercase flex space-x-2 items-center text-sm">
+        <h3 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
           <icon name="drag"/>
           <span>Hunter</span>
         </h3>

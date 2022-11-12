@@ -2,27 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  src: url('/fonts/ProtoMono-Light.otf');
-  font-family: Proto Mono;
-  font-weight: 300;
-  font-display: swap
-}
-
-@font-face {
-  src: url('/fonts/ProtoMono-Regular.otf');
-  font-family: Proto Mono;
-  font-weight: 400;
-  font-display: swap
-}
-
-@font-face {
-  src: url("/fonts/ProtoMono-Bold.otf");
-  font-family: Proto Mono;
-  font-weight: 700;
-  font-display: swap
-}
-
 html {
   -webkit-text-size-adjust: 100%;
 }
@@ -32,7 +11,7 @@ body {
   font-kerning: normal;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
-  font-family: Proto Mono, serif;
+  font-family: Inter, serif;
   font-size: 14px;
 }
 

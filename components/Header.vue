@@ -13,26 +13,29 @@
           :class="{'hidden': !showMobileMenu}"
         >
           <div class="flex-1 bg-white shadow md:shadow-none flex items-center gap-3 dark:bg-neutral-800 dark:border-stone-800 p-4 md:p-0 border md:border-none">
-            <div class="flex flex-col md:flex-row  gap-4 font-bold text-gray-500">
+            <div class="flex flex-col md:flex-row gap-4 font-bold text-gray-500">
               <nuxt-link to="/" class="flex items-center gap-2">
                 <div class="w-3 h-3 flex items-center justify-center rounded-full bg-green-400">
                   <div class="animate-ping w-3 h-3 rounded-full bg-green-400"></div>
                 </div>
                 <span>Ongoing</span>
               </nuxt-link>
-              <nuxt-link to="/upcoming">Upcoming</nuxt-link>
+              <nuxt-link to="/upcoming" class="flex items-center gap-2">
+                <icon name="clock" class="dark:fill-white"/>
+                <span>Upcoming</span>
+              </nuxt-link>
             </div>
           </div>
         </div>
       </div>
       <div class="flex-1 flex gap-4 justify-end">
-        <nuxt-link to="/earn" class="flex items-center items-center gap-2">
+        <nuxt-link to="/earn" class="flex items-center items-center gap-2 text-gray-500">
           <icon name="cash" class="dark:fill-yellow-500"/>
           <span>Earn</span>
         </nuxt-link>
         <client-only>
           <div
-            class="p-1 px-2 flex items-center border cursor-pointer dark:border-stone-500 rounded-xl"
+            class="p-1 px-2 flex items-center border cursor-pointer dark:border-stone-500 rounded-xl text-gray-500"
             @click="login()"
           >
             <icon name="user"/>

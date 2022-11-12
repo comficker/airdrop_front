@@ -2,7 +2,7 @@
   <div class="md:min-h-screen py-4">
     <div class="max-w-3xl mx-auto space-y-4">
       <div class="space-y-2">
-        <h1 class="uppercase text-3xl">Share to Earn</h1>
+        <h1 class="font-semibold text-3xl">Earn</h1>
         <p class="text-gray-500">Got more credit by share airdrop event</p>
       </div>
       <div class="relative">
@@ -19,7 +19,7 @@
             <div class="flow-root py-4 overflow-y-hidden -mb-8">
               <ul role="list">
                 <li>
-                  <div class="relative pb-6">
+                  <div class="relative pb-4">
                     <span class="absolute top-5 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
                     <div class="relative flex items-start space-x-3">
                       <div>
@@ -46,6 +46,7 @@
                           placeholder="todo"
                         >
                         <div
+                          v-if="!(profile && profile.refer_code)"
                           class="rounded bg-green-500 text-white inline-flex gap-1 p-1 px-3 cursor-pointer items-center"
                           @click="submitCode">
                           <span>Submit</span>
@@ -55,7 +56,7 @@
                   </div>
                 </li>
                 <li v-for="item in verification_list" :key="item.id">
-                  <div class="relative pb-6">
+                  <div class="relative pb-4">
                     <span class="absolute top-5 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
                     <div class="relative flex items-center space-x-3">
                       <div>
