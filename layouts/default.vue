@@ -1,6 +1,6 @@
 <template>
   <div :class="{dark: dark}">
-    <div class="py-6 px-4 dark:bg-neutral-800 dark:text-white min-h-screen fill-neutral-500 dark:fill-neutral-100">
+    <div class="py-6 px-4 dark:bg-neutral-800 text-gray-800 dark:text-gray-100 min-h-screen fill-neutral-500 dark:fill-neutral-100">
       <p-header :dark="dark"/>
       <div class="content-wrapper">
         <div class="main-wrapper">

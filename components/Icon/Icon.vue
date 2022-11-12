@@ -95,8 +95,8 @@ export default {
 
 
 .icon svg {
-  width: 1.125rem;
-  height: 1.125rem;
+  width: 1rem;
+  height: 1rem;
 }
 
 .icon.xl svg {

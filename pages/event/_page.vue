@@ -6,7 +6,7 @@
         <div class="text-gray-500">{{ eventTimeStr(now, instance) }}</div>
       </div>
       <h1
-        class="text-3xl text-green-900 font-semibold dark:text-green-300"
+        class="text-4xl text-green-900 font-semibold dark:text-green-300"
         :class="{'h-10 w-32 bg-gray-200 dark:bg-stone-900 animate-pulse mb-2': !instance}"
         :style="!instance ? {width: `45%`} : undefined"
       >
@@ -28,7 +28,7 @@
               <span>Reward</span>
             </h2>
             <template v-for="item in instance.prizes">
-              <div class="flex gap-1 text-3xl">
+              <div class="flex gap-1 text-3xl font-bold">
                 <span class="text-red-500">{{ item.value.toLocaleString() }}</span>
                 <span class="text-gray-400">{{ symbol(item.token.symbol) }}</span>
               </div>
@@ -40,28 +40,33 @@
               <icon name="tasks"></icon>
               <span>Tasks</span>
             </h2>
-            <div v-for="(item, i) in instance.tasks" :key="i" class="flex gap-2 items-start">
+            <div
+              v-for="(item, i) in instance.tasks" :key="i"
+              class="flex gap-2 items-center font-semibold border border-gray-100 dark:border-neutral-700 p-2"
+            >
               <icon name="plus"></icon>
               <div>{{ item }}</div>
             </div>
           </div>
-          <div class="pt-4 grid grid-cols-2 gap-4">
+          <div class="pt-4 grid grid-cols-2 gap-4 font-semibold text-gray-500 dark:fill-gray-500">
             <div
-              class="rounded flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-neutral-700"
+              class="rounded flex justify-center gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-neutral-700"
+              :class="{'text-green-500': instance?.is_joined}"
               @click="action('join', instance, handleAction)"
             >
               <icon name="check" :class="{'fill-green-500': instance?.is_joined}"/>
               <icon name="drag"/>
-              <span>{{instance?.meta?.total_joined || 0}}</span>
+              <span>{{ instance?.meta?.total_joined || 0 }}</span>
               <span class="hidden md:block">joined</span>
             </div>
             <div
-              class="rounded flex gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-neutral-700"
+              class="rounded flex justify-center gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-neutral-700"
+              :class="{'text-green-500': instance?.is_following}"
               @click="action('follow', instance, handleAction)"
             >
               <icon name="follow" :class="{'fill-green-500': instance?.is_following}"/>
               <icon name="drag"></icon>
-              <span>{{instance?.meta?.total_following || 0}}</span>
+              <span>{{ instance?.meta?.total_following || 0 }}</span>
               <span class="hidden md:block">followed</span>
             </div>
           </div>
@@ -76,16 +81,16 @@
                 <span>Include refer code</span>
               </div>
             </div>
-            <input
+            <textarea
               disabled
               :value="social.url"
-              class="dark:bg-stone-900 outline-none p-2 py-2 flex-1 w-full text-gray-500" type="text"
+              class="dark:bg-stone-900 font-mono outline-none p-2 py-2 flex-1 w-full text-gray-500" type="text"
               placeholder="todo"
-            >
+            ></textarea>
             <div class="grid md:grid-cols-2 gap-4 text-center font-bold">
               <div class="">
                 <ShareNetwork
-                  class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-500 hover:dark:bg-blue-500 rounded text-black hover:text-white dark:text-white duration-300"
+                  class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-500 hover:dark:bg-blue-500 rounded text-gray-500 hover:text-white dark:text-gray-100 duration-300"
                   network="facebook"
                   :url="social.url"
                   :title="social.title"
@@ -98,7 +103,7 @@
               </div>
               <div class="">
                 <ShareNetwork
-                  class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-400 hover:dark:bg-blue-500 rounded text-black hover:text-white dark:text-white duration-300"
+                  class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-400 hover:dark:bg-blue-500 rounded text-gray-500 hover:text-white dark:text-gray-100 duration-300"
                   network="twitter"
                   :url="social.url"
                   :title="social.title"
@@ -131,7 +136,7 @@
                   class="rounded"
                 >
               </div>
-              <div>{{instance.project.name}}</div>
+              <div>{{ instance.project.name }}</div>
             </nuxt-link>
           </div>
           <div class="pt-4 space-y-3">
@@ -169,6 +174,7 @@
 
 <script>
 import EventCard from "@/components/EventCard";
+
 export default {
   name: "PageIndex",
   components: {EventCard},

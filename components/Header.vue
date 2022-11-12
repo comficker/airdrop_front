@@ -15,8 +15,10 @@
           <div class="flex-1 bg-white shadow md:shadow-none flex items-center gap-3 dark:bg-neutral-800 dark:border-stone-800 p-4 md:p-0 border md:border-none">
             <div class="flex flex-col md:flex-row gap-4 font-bold text-gray-500">
               <nuxt-link to="/" class="flex items-center gap-2">
-                <div class="w-3 h-3 flex items-center justify-center rounded-full bg-green-400">
-                  <div class="animate-ping w-3 h-3 rounded-full bg-green-400"></div>
+                <div class="w-4 h-4 flex justify-center items-center">
+                  <div class="w-3 h-3 flex items-center justify-center rounded-full bg-green-400 ring ring-green-200">
+                    <div class="animate-ping w-3 h-3 rounded-full bg-green-400"></div>
+                  </div>
                 </div>
                 <span>Ongoing</span>
               </nuxt-link>
