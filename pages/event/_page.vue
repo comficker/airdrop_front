@@ -121,14 +121,32 @@
         <div class="md:pl-4 py-4 md:w-2/5 space-y-4 divide-y divide-dashed dark:divide-stone-800">
           <div class="space-y-3">
             <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
+              <icon name="timeline"/>
+              <span>Timeline</span>
+            </h2>
+            <div>
+              <div class="text-xs text-gray-500">Start date</div>
+              <div class="text-base font-semibold">
+                <template v-if="instance">{{ dateFormat(instance.date_start) }} UTC</template>
+              </div>
+            </div>
+            <div>
+              <div class="text-xs text-gray-500">End date</div>
+              <div class="text-base font-semibold">
+                <template v-if="instance">{{ dateFormat(instance.date_end) }} UTC</template>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 space-y-3">
+            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
               <icon name="business"/>
               <span>Organizer</span>
             </h2>
             <nuxt-link
-              v-if="instance && instance.project" class="flex gap-3 items-center"
+              v-if="instance && instance.project" class="flex gap-2 items-center"
               :to="`/${instance.project.id_string}`"
             >
-              <div class="w-10 h-10">
+              <div class="w-6 h-6">
                 <img
                   v-if="instance.project.media"
                   :src="`${$config.API_URI}${instance.project.media.sizes['thumb_128']}`"
@@ -138,24 +156,6 @@
               </div>
               <div>{{ instance.project.name }}</div>
             </nuxt-link>
-          </div>
-          <div class="pt-4 space-y-3">
-            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
-              <icon name="timeline"/>
-              <span>Timeline</span>
-            </h2>
-            <div>
-              <div class="text-xs text-gray-500">Start date</div>
-              <div>
-                <template v-if="instance">{{ dateFormat(instance.date_start) }} UTC</template>
-              </div>
-            </div>
-            <div>
-              <div class="text-xs text-gray-500">End date</div>
-              <div>
-                <template v-if="instance">{{ dateFormat(instance.date_end) }} UTC</template>
-              </div>
-            </div>
           </div>
           <div class="pt-4">
             <a
