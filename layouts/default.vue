@@ -11,7 +11,7 @@
       </div>
       <adapter/>
       <div
-        class="fixed bottom-0 right-0 left-0 bg-white border-t text-xs text-gray-500 flex items-center dark:bg-neutral-800 dark:border-neutral-700 divide-x dark:divide-neutral-700">
+        class="fixed font-semibold bottom-0 right-0 left-0 bg-white border-t text-xs text-gray-500 flex items-center dark:bg-neutral-800 dark:border-neutral-700 divide-x dark:divide-neutral-700">
         <div class="p-3 py-1 flex gap-2">
           <span>Copyright©2022</span>
           <span class="hidden md:block">ongoingairdrop.com</span>

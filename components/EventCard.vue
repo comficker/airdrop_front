@@ -9,7 +9,7 @@
       </div>
       <div class="flex gap-4">
         <div class="flex-1 space-y-1">
-          <div class="font-semibold a-line text-gray-800 dark:text-gray-100 text-base">
+          <div class="font-semibold a-line text-gray-800 dark:text-gray-100 text-lg">
             <nuxt-link v-if="value" :to="`/event/${value.id_string}`">{{ value.title }}</nuxt-link>
           </div>
           <div class="text-xs flex gap-3">

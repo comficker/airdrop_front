@@ -42,9 +42,9 @@
             </h2>
             <div
               v-for="(item, i) in instance.tasks" :key="i"
-              class="flex gap-2 items-center font-semibold border border-gray-100 dark:border-neutral-700 p-2 text-base"
+              class="flex gap-1 items-center font-semibold border dark:border-neutral-700 p-2 text-base"
             >
-              <icon name="plus"></icon>
+              <icon name="drag"/>
               <div>{{ item }}</div>
             </div>
           </div>
@@ -84,7 +84,7 @@
             <textarea
               disabled
               :value="social.url"
-              class="dark:bg-neutral-700 font-mono outline-none p-2 py-2 flex-1 w-full text-gray-500" type="text"
+              class="dark:bg-neutral-700 font-mono outline-none p-2 py-2 flex-1 w-full" type="text"
               placeholder="todo"
             ></textarea>
             <div class="grid md:grid-cols-2 gap-4 text-center font-bold">
