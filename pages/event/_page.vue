@@ -1,8 +1,12 @@
 <template>
   <div class="md:min-h-screen py-4">
     <div class="max-w-3xl mx-auto space-y-2">
-      <div v-if="instance" class="flex gap-3 text-xs">
-        <div class="">{{ dateFormat(instance.date_start) }} UTC</div>
+      <div v-if="instance" class="flex gap-2 text-xs">
+        <div class="w-4 h-4 flex justify-center items-center">
+          <div class="w-3 h-3 flex items-center justify-center rounded-full bg-green-400 ring ring-green-200">
+            <div class="animate-ping w-3 h-3 rounded-full bg-green-400"></div>
+          </div>
+        </div>
         <div class="text-gray-500">{{ eventTimeStr(now, instance) }}</div>
       </div>
       <h1
@@ -22,20 +26,7 @@
     <div class="max-w-3xl mx-auto">
       <div class="md:flex gap-4 h-full">
         <div class="flex-1 py-4 space-y-4 divide-y dark:divide-stone-700 divide-dashed h-full">
-          <div v-if="instance" class="space-y-2">
-            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
-              <icon name="prize"></icon>
-              <span>Reward</span>
-            </h2>
-            <template v-for="item in instance.prizes">
-              <div class="flex gap-1 text-3xl font-bold">
-                <span class="text-red-500">{{ item.value.toLocaleString() }}</span>
-                <span class="text-gray-400">{{ symbol(item.token.symbol) }}</span>
-              </div>
-              <p class="text-xs text-gray-500">{{ item.note }}</p>
-            </template>
-          </div>
-          <div class="pt-4 space-y-2" v-if="instance">
+          <div class="space-y-2" v-if="instance">
             <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
               <icon name="tasks"></icon>
               <span>Tasks</span>
@@ -119,7 +110,20 @@
           <comment-box class="pt-4"/>
         </div>
         <div class="md:pl-4 py-4 md:w-2/5 space-y-4 divide-y divide-dashed dark:divide-stone-800">
-          <div class="space-y-3">
+          <div v-if="instance" class="space-y-2">
+            <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
+              <icon name="prize"></icon>
+              <span>Reward</span>
+            </h2>
+            <template v-for="item in instance.prizes">
+              <div class="flex gap-1 text-3xl font-bold">
+                <span class="text-red-500">{{ item.value.toLocaleString() }}</span>
+                <span class="text-gray-400">{{ symbol(item.token.symbol) }}</span>
+              </div>
+              <p class="text-xs text-gray-500">{{ item.note }}</p>
+            </template>
+          </div>
+          <div class="pt-4 space-y-2">
             <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
               <icon name="timeline"/>
               <span>Timeline</span>
@@ -137,7 +141,7 @@
               </div>
             </div>
           </div>
-          <div class="pt-4 space-y-3">
+          <div class="pt-4 space-y-2">
             <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
               <icon name="business"/>
               <span>Organizer</span>
