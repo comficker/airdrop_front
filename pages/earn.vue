@@ -6,8 +6,8 @@
         <p class="text-gray-500">Got more credit by share airdrop event</p>
       </div>
       <div class="relative">
-        <div class="border rounded dark:border-stone-700 p-3 shadow">
-          <div class="absolute bg-white dark:bg-stone-800 -top-2 px-3 text-xs uppercase left-4">Verification</div>
+        <div class="border dark:border-stone-700 p-3">
+          <div class="absolute bg-white dark:bg-stone-800 -top-2 px-3 text-xs font-bold uppercase left-4">Verification</div>
           <div v-if="isVerified" class="flex text-green-500 text-xl gap-2" :class="{'blur-sm': !isLogged}">
             <icon name="check" class="lg fill-green-500"/>
             <div class="">
@@ -75,7 +75,7 @@
                       <div class="min-w-0 flex-1 py-1">
                         <div class="text-gray-500 dark:text-gray-200 flex justify-between">
                           <span>{{ item.title }}</span>
-                          <span>{{ countVal(item.id) }}/{{ item.target }}</span>
+                          <span class="font-semibold text-xs">{{ countVal(item.id) }}/{{ item.target }}</span>
                         </div>
                         <p class="text-xs text-gray-500" v-if="item.help">{{ item.help }}</p>
                         <div v-if="item.id === 'invite_friend'">

@@ -30,9 +30,6 @@ export default {
       default: false,
       type: Boolean
     },
-    fill: {
-      default: 'true'
-    },
     vb: {
       default: 24
     }

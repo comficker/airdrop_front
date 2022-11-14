@@ -10,7 +10,7 @@
         <div class="text-gray-500">{{ eventTimeStr(now, instance) }}</div>
       </div>
       <h1
-        class="text-4xl text-green-900 font-semibold dark:text-green-300"
+        class="text-4xl text-gray-800 font-bold dark:text-gray-300"
         :class="{'h-10 w-32 bg-gray-200 dark:bg-stone-900 animate-pulse mb-2': !instance}"
         :style="!instance ? {width: `45%`} : undefined"
       >
@@ -25,8 +25,8 @@
     </div>
     <div class="max-w-3xl mx-auto">
       <div class="md:flex gap-4 h-full">
-        <div class="flex-1 py-4 space-y-4 divide-y dark:divide-stone-700 divide-dashed h-full">
-          <div class="space-y-2" v-if="instance">
+        <div class="flex-1 space-y-6 py-4 h-full">
+          <div class="space-y-3" v-if="instance">
             <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
               <icon name="tasks"></icon>
               <span>Tasks</span>
@@ -39,30 +39,8 @@
               <div>{{ item }}</div>
             </div>
           </div>
-          <div class="pt-4 grid grid-cols-2 gap-4 font-semibold text-gray-500 dark:fill-gray-500">
-            <div
-              class="rounded flex justify-center gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-neutral-700"
-              :class="{'text-green-500': instance?.is_joined}"
-              @click="action('join', instance, handleAction)"
-            >
-              <icon name="check" :class="{'fill-green-500': instance?.is_joined}"/>
-              <icon name="drag"/>
-              <span>{{ instance?.meta?.total_joined || 0 }}</span>
-              <span class="hidden md:block">joined</span>
-            </div>
-            <div
-              class="rounded flex justify-center gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-neutral-700"
-              :class="{'text-green-500': instance?.is_following}"
-              @click="action('follow', instance, handleAction)"
-            >
-              <icon name="follow" :class="{'fill-green-500': instance?.is_following}"/>
-              <icon name="drag"></icon>
-              <span>{{ instance?.meta?.total_following || 0 }}</span>
-              <span class="hidden md:block">followed</span>
-            </div>
-          </div>
-          <div class="pt-4 space-y-3">
-            <div class="font-bold uppercase flex justify-between items-center text-gray-500 text-xs">
+          <div class="p-3 border dark:border-neutral-700">
+            <div class="font-bold uppercase flex justify-between items-center text-gray-500 text-xs mb-2">
               <div class="flex gap-2">
                 <icon name="share"></icon>
                 <span>Share with your friends</span>
@@ -75,13 +53,13 @@
             <textarea
               disabled
               :value="social.url"
-              class="dark:bg-neutral-700 font-mono outline-none p-2 py-2 flex-1 w-full" type="text"
+              class="bg-neutral-100 dark:bg-neutral-700 text-sm outline-none p-2 py-2 flex-1 w-full" type="text"
               placeholder="todo"
             ></textarea>
-            <div class="grid md:grid-cols-2 gap-4 text-center font-bold">
+            <div class="grid md:grid-cols-2 gap-2 text-center font-bold">
               <div class="">
                 <ShareNetwork
-                  class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-500 hover:dark:bg-blue-500 rounded text-gray-500 hover:text-white dark:text-gray-100 duration-300"
+                  class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-500 hover:dark:bg-blue-500 text-gray-500 hover:text-white dark:text-gray-100 duration-300"
                   network="facebook"
                   :url="social.url"
                   :title="social.title"
@@ -94,7 +72,7 @@
               </div>
               <div class="">
                 <ShareNetwork
-                  class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-400 hover:dark:bg-blue-500 rounded text-gray-500 hover:text-white dark:text-gray-100 duration-300"
+                  class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-400 hover:dark:bg-blue-500 text-gray-500 hover:text-white dark:text-gray-100 duration-300"
                   network="twitter"
                   :url="social.url"
                   :title="social.title"
@@ -107,7 +85,7 @@
               </div>
             </div>
           </div>
-          <comment-box class="pt-4"/>
+          <comment-box/>
         </div>
         <div class="md:pl-4 py-4 md:w-2/5 space-y-4 divide-y divide-dashed dark:divide-stone-800">
           <div v-if="instance" class="space-y-2">
@@ -116,7 +94,7 @@
               <span>Reward</span>
             </h2>
             <template v-for="item in instance.prizes">
-              <div class="flex gap-1 text-3xl font-bold">
+              <div class="flex gap-1 text-5xl font-bold">
                 <span class="text-red-500">{{ item.value.toLocaleString() }}</span>
                 <span class="text-gray-400">{{ symbol(item.token.symbol) }}</span>
               </div>
@@ -155,7 +133,6 @@
                   v-if="instance.project.media"
                   :src="`${$config.API_URI}${instance.project.media.sizes['thumb_128']}`"
                   :alt="instance.project.name"
-                  class="rounded"
                 >
               </div>
               <div>{{ instance.project.name }}</div>
@@ -164,11 +141,33 @@
           <div class="pt-4">
             <a
               v-if="instance" :href="`${instance.url}?source=ongoingairdrop.com`" target="_blank" rel="nofollow"
-              class="flex gap-1 rounded justify-center p-2 px-3 cursor-pointer items-center bg-green-600 text-white dark:fill-white fill-white w-full"
+              class="flex gap-1 justify-center p-2 px-3 cursor-pointer items-center bg-green-600 text-white dark:fill-white fill-white w-full"
             >
               <icon name="join"></icon>
               <span>Join</span>
             </a>
+          </div>
+          <div class="pt-4 grid grid-cols-2 gap-4 font-semibold text-gray-500 dark:fill-gray-500">
+            <div
+              class="flex justify-center gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-neutral-700"
+              :class="{'text-green-500': instance?.is_joined}"
+              @click="action('join', instance, handleAction)"
+            >
+              <icon name="check" :class="{'fill-green-500': instance?.is_joined}"/>
+              <icon name="drag"/>
+              <span>{{ instance?.meta?.total_joined || 0 }}</span>
+              <span class="hidden md:block">joined</span>
+            </div>
+            <div
+              class="flex justify-center gap-1 p-1.5 px-3 cursor-pointer items-center border dark:border-neutral-700"
+              :class="{'text-green-500': instance?.is_following}"
+              @click="action('follow', instance, handleAction)"
+            >
+              <icon name="follow" :class="{'fill-green-500': instance?.is_following}"/>
+              <icon name="drag"></icon>
+              <span>{{ instance?.meta?.total_following || 0 }}</span>
+              <span class="hidden md:block">followed</span>
+            </div>
           </div>
         </div>
       </div>

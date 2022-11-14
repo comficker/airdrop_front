@@ -13,7 +13,7 @@
       </div>
       <div class="border bg-white dark:bg-neutral-900 space-y-4 p-4 divide-y divide-dashed dark:divide-stone-700 dark:border-stone-800 rounded">
         <div class="space-y-3">
-          <div class="font-bold flex space-x-2 items-center">
+          <div class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
             <icon name="note"></icon>
             <span class="uppercase">Overview</span>
           </div>
@@ -66,7 +66,7 @@
           </div>
         </div>
         <div class="space-y-3 pt-4">
-          <h2 class="font-bold uppercase flex space-x-2 items-center">
+          <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
             <icon name="tasks"></icon>
             <span>Tasks</span>
           </h2>
@@ -84,7 +84,7 @@
           </div>
         </div>
         <div class="space-y-3 pt-4">
-          <h2 class="font-bold uppercase flex space-x-2 items-center">
+          <h2 class="font-bold uppercase flex space-x-2 items-center text-gray-500 text-xs">
             <icon name="note"></icon>
             <span>Additional</span>
           </h2>

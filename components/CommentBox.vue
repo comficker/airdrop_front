@@ -7,8 +7,8 @@
     <div class="space-y-1.5">
       <textarea
         v-model="content"
-        placeholder="I had an issue!"
-        class="p-3 text-sm border rounded w-full shadow-inner dark:bg-neutral-700 dark:border-neutral-800 outline-none"
+        placeholder="Great!"
+        class="p-3 text-sm border w-full shadow-inner dark:bg-neutral-700 dark:border-neutral-800 outline-none"
       />
       <div class="md:flex justify-between font-bold">
         <div class="flex space-x-3"></div>
