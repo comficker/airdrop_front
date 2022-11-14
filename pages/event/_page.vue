@@ -59,7 +59,7 @@
             <div class="grid md:grid-cols-2 gap-2 text-center font-bold">
               <div class="">
                 <ShareNetwork
-                  class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-500 hover:dark:bg-blue-500 text-gray-500 hover:text-white dark:text-gray-100 duration-300"
+                  class="block cursor-pointer w-full p-2 bg-blue-500 text-white"
                   network="facebook"
                   :url="social.url"
                   :title="social.title"
@@ -72,7 +72,7 @@
               </div>
               <div class="">
                 <ShareNetwork
-                  class="block cursor-pointer w-full p-2 bg-gray-200 dark:bg-neutral-700 hover:bg-blue-400 hover:dark:bg-blue-500 text-gray-500 hover:text-white dark:text-gray-100 duration-300"
+                  class="block cursor-pointer w-full p-2 bg-blue-400 text-white"
                   network="twitter"
                   :url="social.url"
                   :title="social.title"
